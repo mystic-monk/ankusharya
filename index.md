@@ -33,8 +33,6 @@ Linux • Social Network Analysis • Natural Language Processing (SciPy, NLTK) 
 *June 2023 – Present*
 - Panel expert responsible for ascertaining the HPSC requirements in acquiring the cloud version of R.
 - Spearheaded the integration and utilization of visualization tools as part of the data strategy at HPSC, resulting in improved data interpretation and decision-making processes.
-- Spearheaded the visualization of wastewater data products, incorporating maps and plots such as Sankey diagrams. This was accomplished in record time, showcasing our efficiency and expertise.
-- Pioneered the application of LSTM models for time series data analysis, specifically in forecasting influenza trends, resulting in more accurate predictions and proactive public health measures.
 - Conceptualized and implemented a comprehensive data pipeline capable of analyzing multiple diseases, facilitating epidemiological analyses and enhancing public health surveillance capabilities.
 - Developed GAM smoothing (thin plate) techniques in R to visually depict trends in notifiable disease data, enabling stakeholders to identify patterns and make informed decisions.
 - Acted as a dynamic leader in advocating for the adoption of R for data analysis, visualization, and machine learning within HPSC, driving efficiency and innovation in data-driven approaches. Mentored and coached team members to foster a culture of collaboration, knowledge sharing, and continuous learning, contributing to professional development and team cohesion.
