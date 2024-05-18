@@ -1,3 +1,18 @@
+---
+title: "Ankush Arya"
+image: "Ankush.jpg"
+links:
+  - label: LinkedIn
+    url: "https://www.linkedin.com/in/arya-ankush/"
+  - label: X
+    url: "https://x.com/ankush_arya26"
+  - label: GitHub
+    url: "https://github.com/mystic-monk"
+  - label: Email
+    url: "mailto: ankusharya@duck.com"
+output:
+  postcards::trestles
+---
 # ANKUSH ARYA
 Navan, Co. Meath. Ireland C15PY2F | 0899788172  
 arya.ankush@gmail.com | [LinkedIn](https://www.linkedin.com/in/arya-ankush) | [GitHub](https://github.com/mystic-monk)
