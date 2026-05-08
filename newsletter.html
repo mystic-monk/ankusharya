@@ -1,11 +1,15 @@
+<!-- To add a new article: create a new HTML file in an /articles/ subfolder,
+     copy the article template, and add a new card to this page linking to it.
+     Ask Claude to generate the article HTML file using the same style.css. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="She Knows Too Much is a newsletter covering data, analytics, and AI insights for practitioners and curious minds.">
-  <meta property="og:title" content="She Knows Too Much | Newsletter">
-  <meta property="og:description" content="Subscribe to She Knows Too Much, a newsletter covering data, analytics, and AI insights for practitioners and curious minds.">
+  <meta name="description" content="She Knows Too Much — data, analytics, and AI insights for practitioners and curious minds. Subscribe and read articles from Ankush Arya.">
+  <meta property="og:title" content="She Knows Too Much | Newsletter & Insights">
+  <meta property="og:description" content="Subscribe to She Knows Too Much and read articles on data leadership, transport analytics, AI, and public sector transformation.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ankusharya.dev/newsletter.html">
   <link rel="canonical" href="https://ankusharya.dev/newsletter.html">
@@ -13,8 +17,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <title>She Knows Too Much | Newsletter</title>
-  <!-- Replace G-VD4V5PJECV with your actual GA4 Measurement ID -->
+  <title>She Knows Too Much | Newsletter & Insights</title>
+  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VD4V5PJECV"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -36,7 +40,6 @@
           <li><a href="about.html">About</a></li>
           <li><a href="projects.html">Projects</a></li>
           <li><a href="newsletter.html">Newsletter</a></li>
-          <li><a href="blog.html">Blog</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
         <div class="nav-social">
@@ -48,28 +51,88 @@
     </header>
 
     <main>
+      <!-- 1. Hero + Subscribe -->
       <section class="hero hero-newsletter" aria-labelledby="newsletter-title">
         <p class="eyebrow">Newsletter</p>
         <h1 id="newsletter-title">She Knows Too Much</h1>
-        <p class="hero-text">A newsletter covering data, analytics, and AI insights for practitioners and curious minds.</p>
-      </section>
-
-      <section class="newsletter-content" aria-labelledby="newsletter-heading">
-        <h2 id="newsletter-heading">Subscribe for weekly insight</h2>
-        <p>Explore thoughtful analysis on analytics practice, AI adoption, and data-led transformation in the public sector and beyond.</p>
-        <div class="form-card">
-          <form class="signup-form" action="https://your-mail-service.com/replace-me" method="post">
-            <label for="email">Email address</label>
-            <input id="email" type="email" name="email" placeholder="you@example.com" required>
-            <button class="button button-primary" type="submit">Join the newsletter</button>
-            <p class="form-note">Replace the form action URL with your Mailchimp or Substack endpoint.</p>
+        <p class="hero-text">Data, analytics, and AI insights for practitioners and curious minds.</p>
+        <div class="form-card" style="margin-top: 1.5rem;">
+          <!-- Replace subscribe action with Substack or Mailchimp embed code -->
+          <form class="signup-form" action="https://your-mail-service.com/replace-me" method="post" aria-label="Newsletter subscribe form">
+            <label for="email-hero">Email address</label>
+            <input id="email-hero" type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+            <button class="button button-primary" type="submit">Subscribe — it's free</button>
+            <p class="form-note">Replace the form action with your Substack or Mailchimp endpoint.</p>
           </form>
         </div>
       </section>
 
-      <section class="archive-placeholder" aria-labelledby="archive-title">
-        <h2 id="archive-title">Archive</h2>
-        <p>Past issues coming soon. This page will list curated newsletters and archived insights once they are published.</p>
+      <!-- 2. Latest Insights -->
+      <section class="insights-section" aria-labelledby="insights-title">
+        <h2 id="insights-title">Latest Insights</h2>
+        <p>Thoughts on data leadership, analytics engineering, AI in the public sector, and the craft of turning complex information into decisions.</p>
+
+        <div class="article-cards" role="list">
+
+          <article class="article-card" role="listitem">
+            <!-- Replace href with path to article HTML file when published, e.g. articles/article-title.html -->
+            <h3><a href="#">Why Public Sector Data Governance Needs a Different Playbook</a></h3>
+            <div class="article-meta">
+              <span class="topic-tag">Data Governance</span>
+              <span aria-label="Publication date">Coming Soon</span>
+            </div>
+            <p class="article-summary">Government data ecosystems operate under constraints that private sector frameworks rarely account for — from procurement cycles to ministerial accountability. This article unpacks why standard governance playbooks fall short and what practitioners need to know instead.</p>
+            <a href="#" class="read-more" aria-label="Read more about public sector data governance">Read More →</a>
+          </article>
+
+          <article class="article-card" role="listitem">
+            <!-- Replace href with path to article HTML file when published, e.g. articles/article-title.html -->
+            <h3><a href="#">Building a RAG Application for Policy Documents: What I Learned</a></h3>
+            <div class="article-meta">
+              <span class="topic-tag">AI and Machine Learning</span>
+              <span aria-label="Publication date">Coming Soon</span>
+            </div>
+            <p class="article-summary">Retrieval-augmented generation is a powerful pattern, but applying it to dense policy documents surfaces challenges around chunking, metadata, and retrieval quality that standard tutorials gloss over. Here is what I discovered building a working prototype.</p>
+            <a href="#" class="read-more" aria-label="Read more about building a RAG application">Read More →</a>
+          </article>
+
+          <article class="article-card" role="listitem">
+            <!-- Replace href with path to article HTML file when published, e.g. articles/article-title.html -->
+            <h3><a href="#">From Bus Stops to Boardrooms: Translating Transport Data into Decisions</a></h3>
+            <div class="article-meta">
+              <span class="topic-tag">Transport Analytics</span>
+              <span aria-label="Publication date">Coming Soon</span>
+            </div>
+            <p class="article-summary">Operational transport data — GTFS feeds, AVL streams, passenger counts — is rich but difficult to summarise for strategic audiences. This article explores how to bridge the gap between granular telemetry and executive decision making.</p>
+            <a href="#" class="read-more" aria-label="Read more about transport data and decisions">Read More →</a>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- 3. Topics strip -->
+      <section class="topics-strip" aria-labelledby="topics-label">
+        <p class="strip-label" id="topics-label">Topics Covered</p>
+        <div class="topic-pills" role="list">
+          <span class="topic-pill" role="listitem">Data Leadership</span>
+          <span class="topic-pill" role="listitem">Transport Analytics</span>
+          <span class="topic-pill" role="listitem">AI and ML</span>
+          <span class="topic-pill" role="listitem">Public Sector</span>
+          <span class="topic-pill" role="listitem">Data Governance</span>
+          <span class="topic-pill" role="listitem">Analytics Engineering</span>
+          <span class="topic-pill" role="listitem">Education</span>
+        </div>
+      </section>
+
+      <!-- 4. Repeat subscribe -->
+      <section class="subscribe-repeat" aria-labelledby="subscribe-repeat-title">
+        <p id="subscribe-repeat-title">Get new insights directly to your inbox</p>
+        <!-- Replace subscribe action with Substack or Mailchimp embed code -->
+        <div class="subscribe-inline">
+          <input type="email" name="email" placeholder="you@example.com" autocomplete="email" aria-label="Email address for newsletter">
+          <button class="button button-primary" type="button" onclick="document.querySelector('#email-hero').scrollIntoView({behavior:'smooth'})">Subscribe</button>
+        </div>
+        <p class="form-note" style="margin-top: 0.75rem;">Replace with your Substack or Mailchimp embed.</p>
       </section>
     </main>
 
