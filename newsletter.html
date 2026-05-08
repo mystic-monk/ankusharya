@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="She Knows Too Much is a newsletter covering data, analytics, and AI insights for practitioners and curious minds.">
+  <meta property="og:title" content="She Knows Too Much | Newsletter">
+  <meta property="og:description" content="Subscribe to She Knows Too Much, a newsletter covering data, analytics, and AI insights for practitioners and curious minds.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://your-portfolio-site.com/newsletter.html">
+  <link rel="canonical" href="https://your-portfolio-site.com/newsletter.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>She Knows Too Much | Newsletter</title>
+  <!-- Replace G-XXXXXXXXXX with your actual GA4 Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="site-brand"><a href="index.html">Ankush Arya</a></div>
+      <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Open navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="primary-navigation" class="primary-navigation" aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="newsletter.html">Newsletter</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-social">
+          <a href="https://www.linkedin.com/in/arya-ankush/" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+          <a href="https://github.com/mystic-monk" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
+          <a href="https://x.com/ankush_arya26" target="_blank" rel="noopener" aria-label="Twitter">X</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero hero-newsletter" aria-labelledby="newsletter-title">
+        <p class="eyebrow">Newsletter</p>
+        <h1 id="newsletter-title">She Knows Too Much</h1>
+        <p class="hero-text">A newsletter covering data, analytics, and AI insights for practitioners and curious minds.</p>
+      </section>
+
+      <section class="newsletter-content" aria-labelledby="newsletter-heading">
+        <h2 id="newsletter-heading">Subscribe for weekly insight</h2>
+        <p>Explore thoughtful analysis on analytics practice, AI adoption, and data-led transformation in the public sector and beyond.</p>
+        <div class="form-card">
+          <form class="signup-form" action="https://your-mail-service.com/replace-me" method="post">
+            <label for="email">Email address</label>
+            <input id="email" type="email" name="email" placeholder="you@example.com" required>
+            <button class="button button-primary" type="submit">Join the newsletter</button>
+            <p class="form-note">Replace the form action URL with your Mailchimp or Substack endpoint.</p>
+          </form>
+        </div>
+      </section>
+
+      <section class="archive-placeholder" aria-labelledby="archive-title">
+        <h2 id="archive-title">Archive</h2>
+        <p>Past issues coming soon. This page will list curated newsletters and archived insights once they are published.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <p>Subscribe for updates from <strong>She Knows Too Much</strong>, a newsletter on data, analytics, and AI.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/arya-ankush/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/mystic-monk" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://x.com/ankush_arya26" target="_blank" rel="noopener">X</a>
+      </div>
+      <p class="copyright">© 2026 Ankush Arya. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const menuButton = document.querySelector('.menu-toggle');
+    const navMenu = document.getElementById('primary-navigation');
+    menuButton.addEventListener('click', () => {
+      const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!expanded));
+      navMenu.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

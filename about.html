@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About Ankush Arya, BI Lead at NTA and analytics educator with cross-sector experience in financial services, healthcare, and public sector transport.">
+  <meta property="og:title" content="Ankush Arya | About">
+  <meta property="og:description" content="Learn about Ankush Arya's career in BI leadership, analytics education, and AI-enabled transformation across sectors.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://your-portfolio-site.com/about.html">
+  <link rel="canonical" href="https://your-portfolio-site.com/about.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Ankush Arya | About</title>
+  <!-- Replace G-XXXXXXXXXX with your actual GA4 Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="site-brand"><a href="index.html">Ankush Arya</a></div>
+      <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Open navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="primary-navigation" class="primary-navigation" aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="newsletter.html">Newsletter</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-social">
+          <a href="https://www.linkedin.com/in/arya-ankush/" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+          <a href="https://github.com/mystic-monk" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
+          <a href="https://x.com/ankush_arya26" target="_blank" rel="noopener" aria-label="Twitter">X</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero hero-about" aria-labelledby="about-title">
+        <h1 id="about-title">About</h1>
+        <p class="hero-text">I combine hands-on BI leadership at the National Transport Authority with a long record of analytical work across industry and public service. I also support emerging analytics talent as a part-time Master's supervisor in Analytics and AI at Dublin Business School.</p>
+      </section>
+
+      <section class="split-panel" aria-labelledby="professional-title">
+        <div>
+          <h2 id="professional-title">Professional</h2>
+          <p>As BI Lead at NTA, I oversee data strategy and insight delivery for transport operations and policy. My experience spans more than 20 years across financial services at Bank of Ireland, healthcare analytics with HSE HPSC, and public sector transport intelligence.</p>
+        </div>
+        <div>
+          <h2 id="educator-title">Educator</h2>
+          <p>In my role as a part-time Master's supervisor at Dublin Business School, I mentor students on analytics and AI projects, helping practitioners develop practical skills and applied research confidence.</p>
+        </div>
+      </section>
+
+      <section class="social-buttons" aria-label="Social links">
+        <a class="button button-secondary" href="https://www.linkedin.com/in/arya-ankush/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="button button-secondary" href="https://github.com/mystic-monk" target="_blank" rel="noopener">GitHub</a>
+        <a class="button button-secondary" href="https://x.com/ankush_arya26" target="_blank" rel="noopener">X</a>
+      </section>
+
+      <section class="timeline" aria-labelledby="timeline-title">
+        <h2 id="timeline-title">Key milestones</h2>
+        <ol>
+          <li>
+            <strong>Financial services analytics</strong>
+            <p>Bank of Ireland — building reporting and data-driven customer insight capabilities.</p>
+          </li>
+          <li>
+            <strong>Healthcare data intelligence</strong>
+            <p>HSE HPSC — applying analytics to public health monitoring and performance reporting.</p>
+          </li>
+          <li>
+            <strong>Transport and public sector BI</strong>
+            <p>NTA — leading transport licensing analytics, operational dashboards, and strategic analysis.</p>
+          </li>
+          <li>
+            <strong>Analytics education</strong>
+            <p>Dublin Business School — guiding students on analytics, AI, and real-world data projects.</p>
+          </li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <p>Subscribe for updates from <strong>She Knows Too Much</strong>, a newsletter on data, analytics, and AI.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/arya-ankush/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/mystic-monk" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://x.com/ankush_arya26" target="_blank" rel="noopener">X</a>
+      </div>
+      <p class="copyright">© 2026 Ankush Arya. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const menuButton = document.querySelector('.menu-toggle');
+    const navMenu = document.getElementById('primary-navigation');
+    menuButton.addEventListener('click', () => {
+      const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!expanded));
+      navMenu.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

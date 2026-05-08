@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ankush Arya is a senior analytics leader covering cross-sector BI, public sector transport, and education in analytics and AI.">
+  <meta property="og:title" content="Ankush Arya | BI Lead & Analytics Leader">
+  <meta property="og:description" content="Senior analytics leader with public sector transport BI leadership, healthcare and financial services experience, and a focus on analytics education and AI.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://your-portfolio-site.com/index.html">
+  <link rel="canonical" href="https://your-portfolio-site.com/index.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Ankush Arya | Home</title>
+  <!-- Replace G-XXXXXXXXXX with your actual GA4 Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="site-brand"><a href="index.html">Ankush Arya</a></div>
+      <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Open navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="primary-navigation" class="primary-navigation" aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="newsletter.html">Newsletter</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-social">
+          <a href="https://www.linkedin.com/in/arya-ankush/" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+          <a href="https://github.com/mystic-monk" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
+          <a href="https://x.com/ankush_arya26" target="_blank" rel="noopener" aria-label="Twitter">X</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero hero-home" aria-labelledby="home-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Senior Analytics Leader</p>
+          <h1 id="home-title">Ankush Arya</h1>
+          <p class="hero-text">I bring cross-sector analytics leadership across public sector transport, healthcare, and financial services. As BI Lead at NTA and a part-time analytics educator, I help teams translate data into trusted insights and actionable decisions.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="projects.html">View My Work</a>
+            <a class="button button-secondary" href="newsletter.html">Read the Newsletter</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="visual-card">Portfolio</div>
+        </div>
+      </section>
+
+      <section class="highlight-grid" aria-labelledby="highlights-title">
+        <h2 id="highlights-title">Highlights</h2>
+        <div class="grid-cards">
+          <article class="card">
+            <h3>BI Leadership</h3>
+            <p>Driving evidence-based decision making across transport intelligence and strategic reporting.</p>
+          </article>
+          <article class="card">
+            <h3>Data Science Education</h3>
+            <p>Mentoring postgraduate learners in analytics, AI, and applied research at DBS.</p>
+          </article>
+          <article class="card">
+            <h3>Analytics and AI</h3>
+            <p>Building practical AI-enabled tools with a focus on responsible, useful solutions.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="social-proof" aria-labelledby="proof-title">
+        <h2 id="proof-title">Trusted by</h2>
+        <div class="proof-items">
+          <div class="proof-item"><strong>NTA</strong><span>BI Lead, National Transport Authority</span></div>
+          <div class="proof-item"><strong>DBS</strong><span>Part-time Master's Supervisor, Analytics and AI</span></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <p>Subscribe for updates from <strong>She Knows Too Much</strong>, a newsletter on data, analytics, and AI.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/arya-ankush/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/mystic-monk" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://x.com/ankush_arya26" target="_blank" rel="noopener">X</a>
+      </div>
+      <p class="copyright">© 2026 Ankush Arya. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const menuButton = document.querySelector('.menu-toggle');
+    const navMenu = document.getElementById('primary-navigation');
+    menuButton.addEventListener('click', () => {
+      const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!expanded));
+      navMenu.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
