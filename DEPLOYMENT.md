@@ -66,9 +66,9 @@ In **all HTML files** (index.html, about.html, projects.html, etc.):
 
 ```html
 <!-- BEFORE -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VD4V5PJECV"></script>
 <script>
-  gtag('config', 'G-XXXXXXXXXX');
+  gtag('config', 'G-VD4V5PJECV');
 </script>
 
 <!-- AFTER -->

@@ -47,7 +47,7 @@ In `index.html`, replace the placeholder text in the hero section with your 2-se
 
 | File | Placeholder | Instructions |
 |------|-------------|--------------|
-| All HTML | `G-XXXXXXXXXX` | Replace with GA4 Measurement ID |
+| All HTML | `G-VD4V5PJECV` | Replace with GA4 Measurement ID |
 | All HTML | `ankusharya.dev` | Update canonical URLs if using different domain |
 | `contact.html` | Formspree URL | Replace with your formspree.io endpoint |
 | `projects.html` | Render URLs | Update with live demo service URLs once deployed |
