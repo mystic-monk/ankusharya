@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="On logistic regression, black boxes, and what the data professionals who thrive in credit risk actually understand. By Ankush Arya.">
+  <meta property="og:title" content="The Algorithm That Will Not Die (And Why That Is the Right Answer)">
+  <meta property="og:description" content="On logistic regression, black boxes, and what the data professionals who thrive in credit risk actually understand.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ankusharya.dev/articles/the-algorithm-that-will-not-die.html">
+  <meta property="article:published_time" content="2026-03-20">
+  <link rel="canonical" href="https://ankusharya.dev/articles/the-algorithm-that-will-not-die.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <title>The Algorithm That Will Not Die | She Knows Too Much</title>
+  <style>
+    .article-hero {
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+    }
+
+    .article-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      line-height: 1.2;
+      margin: 1rem 0 1.25rem;
+    }
+
+    .article-hero .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .article-hero .article-meta .sep {
+      color: var(--border);
+    }
+
+    .article-lede {
+      font-size: 1.15rem;
+      color: var(--muted);
+      line-height: 1.65;
+      font-style: italic;
+      max-width: 44rem;
+      margin: 0;
+    }
+
+    .article-body {
+      max-width: 44rem;
+    }
+
+    .article-body p {
+      margin-top: 1.5rem;
+      margin-bottom: 0;
+    }
+
+    .article-body h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      line-height: 1.25;
+      margin-top: 3rem;
+      margin-bottom: 0;
+      color: var(--text);
+    }
+
+    .article-pull {
+      border-left: 4px solid var(--yellow);
+      padding: 1rem 1.5rem;
+      margin: 2.5rem 0;
+      background: rgba(245, 200, 66, 0.08);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .article-pull p {
+      margin: 0;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .article-signoff {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .article-signoff p {
+      margin-top: 1rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .article-newsletter {
+      background: var(--primary-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      margin-top: 3rem;
+    }
+
+    .article-newsletter h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      margin: 0 0 0.5rem;
+    }
+
+    .article-newsletter p {
+      margin: 0 0 1.25rem;
+      color: var(--muted);
+    }
+
+    .article-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .article-back:hover {
+      color: var(--text);
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VD4V5PJECV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VD4V5PJECV');
+  </script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="site-brand"><a href="../index.html">Ankush Arya</a></div>
+      <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Open navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="primary-navigation" class="primary-navigation" aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../projects.html">Projects</a></li>
+          <li><a href="../newsletter.html">Newsletter</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <article aria-labelledby="article-title">
+
+        <a href="../newsletter.html" class="article-back">← She Knows Too Much</a>
+
+        <header class="article-hero">
+          <p class="eyebrow">She Knows Too Much</p>
+          <h1 id="article-title">The Algorithm That Will Not Die (And Why That Is the Right Answer)</h1>
+          <div class="article-meta">
+            <span class="topic-tag">Credit Risk</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <span>Ankush Arya</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <time datetime="2026-03-20">March 20, 2026</time>
+          </div>
+          <p class="article-lede">On logistic regression, black boxes, and what the data professionals who thrive in credit risk actually understand</p>
+        </header>
+
+        <div class="article-body">
+
+          <p>There is a kind of respect reserved for things that have survived long enough to stop needing to prove themselves. You recognise it when you see it, in a recipe that has not changed in three generations, in a bridge built before computers that is still carrying lorries, in the elder at the table who has stopped explaining and started just being right. The most powerful model in consumer credit risk carries that same quality. It was published in 1958. It has no hidden layers. It cannot hallucinate. A regulator can ask it to explain itself, and it will. In plain language. With numbers.</p>
+
+          <p>Logistic regression is still running credit decisions for most of the world's banks. Not because nobody told them about neural networks. Not because the quants have been asleep. Because in credit risk, the model that can be explained is not a compromise. It is the product. There is a difference between something old and something proven. This is the second thing.</p>
+
+          <p>The tension is not new. People who have spent time inside credit risk teams at major banks will tell you the same thing: the question was never whether a more complex model performed better. It almost always did. The question was whether you could defend it, to the Central Bank, to an audit committee, to a judge. That is a different question entirely. And in most cases, the answer was no. The model you could explain was the model you could keep.</p>
+
+          <h2>Why the 60-year-old algorithm still runs the room</h2>
+
+          <p>Logistic regression produces an output that is interpretable by design. You can pull out a coefficient and say: for every additional year of credit history, the log-odds of default decrease by this amount. You can build a scorecard from it. You can show a customer why they were declined and satisfy the adverse action notice requirements that regulators in the EU, UK, and US all mandate in some form.</p>
+
+          <p>The EU's Consumer Credit Directive and the broader requirements under GDPR's Article 22 mean that automated decisions affecting individuals cannot simply be outputs from a black box. There must be meaningful explanation. Logistic regression does not require any additional interpretability scaffolding. It is, by its nature, the explanation.</p>
+
+          <p>Gradient boosted trees can outperform it on discrimination metrics. The model catches more defaults before they happen. But then you sit in a governance committee and someone asks why applicant X was scored the way they were, and the model cannot tell you in any form that is legally defensible.</p>
+
+          <p>You can run SHAP values. You can run LIME. You can approximate the explanation after the fact. But you are now explaining an approximation of a model using another approximation. That is not explainability. That is a liability.</p>
+
+          <p>So the industry made a rational choice. It kept the model it could defend.</p>
+
+          <h2>Where the new models actually live</h2>
+
+          <p>This is the part that gets lost in the debate. The question is not whether large language models and complex ML are being used in financial services. They are. Significantly. The question is where in the process they earn their place.</p>
+
+          <p>LLMs are being used for fraud narrative detection, where the task is pattern recognition across unstructured communication and the output is a flag for human review, not a binding credit decision. They are being used in document processing, pulling structured fields out of unstructured loan applications and financial statements. They are being used in customer-facing explanation layers, taking a scorecard output and generating a readable summary of why a decision was made. They are being used in early-warning systems and portfolio monitoring, where the output informs a human analyst rather than triggering an automated action.</p>
+
+          <h2>The architecture principle</h2>
+
+          <p>In each of those cases, the LLM is operating in a space where the consequences of an error are bounded, where a human sits between the model output and the consequential decision, or where the task is genuinely better suited to language understanding than to numerical optimisation. That is not compromise. That is architecture.</p>
+
+          <div class="article-pull">
+            <p>The black box does not run the credit committee. It briefs the analyst before the meeting.</p>
+          </div>
+
+          <h2>The thing nobody says at the conference</h2>
+
+          <p>There is a version of this conversation that gets performed at every data conference, where someone from a fintech stands up and says the incumbents are too slow, too conservative, too wedded to old tools. And there is a version where someone from a risk function says the new models are irresponsible, unauditable, and dangerous.</p>
+
+          <p>Both of those people are right about the other's blind spot and wrong about their own.</p>
+
+          <p>The fintech that runs an opaque model without the governance infrastructure to support it is one regulatory letter away from a very difficult conversation. The incumbent that refuses to let any modern tooling near a credit process is leaving efficiency, fraud detection capability, and customer experience on the table.</p>
+
+          <p>The data professionals who thrive in this space are not the ones who picked a side. They are the ones who understand what each model is actually good at, what each model requires to be deployed responsibly, and how to build systems where the explainable model handles the regulated decision and the complex model handles the tasks where complexity is actually appropriate.</p>
+
+          <p>That is not a diplomatic answer. It is a precise one.</p>
+
+          <h2>The practical takeaway</h2>
+
+          <p>If you are building or advising on credit models: the question to ask at the start of every modelling engagement is not <em>what is the most accurate model we can build</em>. It is <em>what is the most accurate model we can deploy, defend, and maintain</em>. Those are not the same question, and the gap between them is where most model governance failures live.</p>
+
+          <p>Logistic regression is not a fallback. It is a deliberate choice made by people who understand what the regulatory environment requires and what the cost of getting it wrong looks like. The LLM sitting beside it is not a replacement. It is doing the work the scorecard cannot do, in the places where that work belongs.</p>
+
+          <div class="article-signoff">
+            <p><em>She already knew which model to trust. She just needed the meeting to catch up.</em></p>
+            <p><em>She Knows Too Much is a newsletter about data, intuition, and the unsettling overlap between them. Written from Dublin, where the rain is reliable and the models are not always.</em></p>
+            <p><em>If this landed for you, forward it to someone who needs to hear it. Or reply and tell me where I have got it wrong. Either way, she already knew.</em></p>
+          </div>
+
+        </div>
+
+        <div class="article-newsletter" aria-label="Newsletter subscription">
+          <h2>She Knows Too Much</h2>
+          <p>Data, analytics, and AI insights for practitioners and curious minds. No noise, no hype — just the things worth thinking about.</p>
+          <!-- Replace subscribe action with Substack or Mailchimp embed code -->
+          <form class="signup-form" action="https://your-mail-service.com/replace-me" method="post" aria-label="Newsletter subscribe form" style="max-width: 30rem;">
+            <label for="email-article">Email address</label>
+            <input id="email-article" type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+            <button class="button button-primary" type="submit">Subscribe — it's free</button>
+          </form>
+        </div>
+
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <p>Subscribe for updates from <strong>She Knows Too Much</strong>, a newsletter on data, analytics, and AI.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/arya-ankush/" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/mystic-monk" target="_blank" rel="noopener" aria-label="GitHub profile">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a href="https://x.com/ankush_arya26" target="_blank" rel="noopener" aria-label="Twitter / X profile">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </div>
+      <p class="copyright">© 2026 Ankush Arya. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const menuButton = document.querySelector('.menu-toggle');
+    const navMenu = document.getElementById('primary-navigation');
+    menuButton.addEventListener('click', () => {
+      const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!expanded));
+      navMenu.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
