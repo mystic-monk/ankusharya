@@ -440,6 +440,16 @@ button {
   padding: 1.25rem;
 }
 
+.timeline li strong {
+  display: inline-block;
+  background: var(--yellow);
+  color: var(--text);
+  padding: 0.15rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  margin-bottom: 0.35rem;
+}
+
 .project-cards {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
@@ -615,6 +625,12 @@ a:focus-visible {
     grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
     gap: 2rem;
     align-items: center;
+  }
+
+  .hero-about,
+  .hero-newsletter,
+  .hero-contact {
+    display: block;
   }
 }
 
