@@ -597,6 +597,35 @@ a:focus-visible {
   margin: 0;
 }
 
+.about-hero-inner {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.about-hero-text {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.profile-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--yellow);
+  flex-shrink: 0;
+}
+
+.article-card-image {
+  width: calc(100% + 3.5rem);
+  margin: -1.75rem -1.75rem 0;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
 @media (min-width: 780px) {
   .site-header {
     padding-top: 2rem;
