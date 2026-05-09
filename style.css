@@ -1,5 +1,6 @@
 :root {
   color-scheme: light;
+  --yellow: #F5C842;
   --bg: #f6f3ed;
   --surface: #ffffff;
   --surface-strong: #e9e4d8;
@@ -124,17 +125,46 @@ button {
 }
 
 .nav-social a {
-  padding: 0.55rem 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
   border-radius: 999px;
   background: var(--surface-strong);
   border: 1px solid var(--border);
-  transition: background 0.25s ease, color 0.25s ease;
+  color: var(--text);
+  transition: background 0.25s ease;
+}
+
+.nav-social a svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  display: block;
+  transition: fill 0.25s ease;
 }
 
 .nav-social a:hover,
 .nav-social a:focus-visible {
   background: var(--primary-soft);
   outline: none;
+}
+
+.nav-social a:hover svg,
+.nav-social a:focus-visible svg {
+  fill: var(--yellow);
+}
+
+/* Active navigation state */
+#page-home .nav-list a[href="index.html"],
+#page-about .nav-list a[href="about.html"],
+#page-projects .nav-list a[href="projects.html"],
+#page-newsletter .nav-list a[href="newsletter.html"],
+#page-contact .nav-list a[href="contact.html"] {
+  color: var(--text);
+  font-weight: 700;
+  border-bottom: 2px solid var(--yellow);
+  padding-bottom: 0.15rem;
 }
 
 .hero {
@@ -186,6 +216,12 @@ button {
   transform: translateY(-1px);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
   outline: none;
+}
+
+.button-primary:hover,
+.button-primary:focus-visible {
+  background: var(--yellow);
+  color: var(--text);
 }
 
 .button-primary {
@@ -251,8 +287,8 @@ button {
   padding: 0.2rem 0.65rem;
   border-radius: 999px;
   font-size: 0.8rem;
-  background: rgba(139, 155, 133, 0.15);
-  color: #4b573f;
+  background: var(--yellow);
+  color: var(--text);
 }
 
 .article-summary {
@@ -299,8 +335,8 @@ button {
   align-items: center;
   padding: 0.4rem 1rem;
   border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--surface-strong);
+  border: 1px solid transparent;
+  background: var(--yellow);
   font-size: 0.9rem;
   color: var(--text);
 }
@@ -530,6 +566,21 @@ a:focus-visible {
 
 .footer-links a {
   color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-links a svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  display: block;
+  transition: fill 0.25s ease;
+}
+
+.footer-links a:hover svg,
+.footer-links a:focus-visible svg {
+  fill: var(--yellow);
 }
 
 .copyright {
