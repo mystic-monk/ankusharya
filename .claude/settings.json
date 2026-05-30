@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(Remove-Item \"c:\\\\Users\\\\ankush.arya\\\\Dev\\\\myprofile\\\\blog.html\")"
+      "Bash(Remove-Item \"c:\\\\Users\\\\ankush.arya\\\\Dev\\\\myprofile\\\\blog.html\")",
+      "Bash(ls -t \"c:/Users/ankush.arya/Downloads/\" | head -20)",
+      "Read(//c/Users/ankush.arya/Downloads/**)"
     ]
   }
 }
