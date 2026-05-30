@@ -4,7 +4,8 @@
       "Bash(Remove-Item \"c:\\\\Users\\\\ankush.arya\\\\Dev\\\\myprofile\\\\blog.html\")",
       "Bash(ls -t \"c:/Users/ankush.arya/Downloads/\" | head -20)",
       "Read(//c/Users/ankush.arya/Downloads/**)",
-      "PowerShell(Copy-Item \"C:\\\\Users\\\\ankush.arya\\\\Dev\\\\myprofile\\\\images\\\\three-roles-walked-in.jpg\" \"C:\\\\Users\\\\ankush.arya\\\\Dev\\\\myprofile\\\\articles\\\\images\\\\three-roles-walked-in.jpg\")"
+      "PowerShell(Copy-Item \"C:\\\\Users\\\\ankush.arya\\\\Dev\\\\myprofile\\\\images\\\\three-roles-walked-in.jpg\" \"C:\\\\Users\\\\ankush.arya\\\\Dev\\\\myprofile\\\\articles\\\\images\\\\three-roles-walked-in.jpg\")",
+      "PowerShell(New-Item -ItemType Directory -Force -Path \"C:\\\\Users\\\\ankush.arya\\\\Dev\\\\myprofile\\\\posters\")"
     ]
   }
 }
