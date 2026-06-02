@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Applying logistic regression in R to a telecom customer churn dataset — exploratory analysis, model building via LRT, and actionable conclusions. By Ankush Arya.">
+  <meta property="og:title" content="Customer Churn: Logistic Regression with R">
+  <meta property="og:description" content="Applying logistic regression in R to a telecom customer churn dataset — exploratory analysis, model building via LRT, and actionable conclusions.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ankusharya.dev/articles/customer-churn-logistic-regression-r.html">
+  <meta property="article:published_time" content="2022-11-26">
+  <link rel="canonical" href="https://ankusharya.dev/articles/customer-churn-logistic-regression-r.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <title>Customer Churn: Logistic Regression with R | She Knows Too Much</title>
+  <style>
+    .article-hero {
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+    }
+
+    .article-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      line-height: 1.2;
+      margin: 1rem 0 1.25rem;
+    }
+
+    .article-hero .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .article-hero .article-meta .sep { color: var(--border); }
+
+    .article-lede {
+      font-size: 1.15rem;
+      color: var(--muted);
+      line-height: 1.65;
+      font-style: italic;
+      max-width: 44rem;
+      margin: 0;
+    }
+
+    .article-featured-image {
+      width: 100%;
+      border-radius: var(--radius);
+      margin: 2rem 0 0;
+      border: 1px solid var(--border);
+      display: block;
+    }
+
+    .article-body {
+      max-width: 44rem;
+    }
+
+    .article-body p {
+      margin-top: 1.5rem;
+      margin-bottom: 0;
+    }
+
+    .article-body h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      line-height: 1.25;
+      margin-top: 3rem;
+      margin-bottom: 0;
+      color: var(--text);
+    }
+
+    .article-body h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: 0;
+      color: var(--text);
+    }
+
+    .article-body ul, .article-body ol {
+      margin-top: 1rem;
+      padding-left: 1.5rem;
+    }
+
+    .article-body li {
+      margin-top: 0.5rem;
+      line-height: 1.65;
+    }
+
+    .article-body code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85em;
+      background: var(--primary-soft);
+      padding: 0.1em 0.35em;
+      border-radius: 3px;
+      color: var(--text);
+    }
+
+    .article-body .formula-block {
+      background: var(--primary-soft);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent, #4a7fa8);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1rem 1.25rem;
+      margin-top: 1.25rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      color: var(--text);
+    }
+
+    .article-pull {
+      border-left: 4px solid var(--yellow);
+      padding: 1rem 1.5rem;
+      margin: 2.5rem 0;
+      background: rgba(245, 200, 66, 0.08);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .article-pull p {
+      margin: 0;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .findings-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+
+    .finding-card {
+      padding: 0.9rem 1rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .finding-card strong {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.3rem;
+    }
+
+    .fc-positive { background: #eaf5ec; border-color: #a8d5b0; }
+    .fc-positive strong { color: #1a6630; }
+    .fc-negative { background: #faebe9; border-color: #e89d97; }
+    .fc-negative strong { color: #a84d44; }
+    .fc-neutral { background: var(--primary-soft); border-color: var(--border); }
+    .fc-neutral strong { color: var(--muted); }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .tag-list span {
+      font-size: 0.75rem;
+      background: var(--primary-soft);
+      color: var(--muted);
+      padding: 0.2rem 0.6rem;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+    }
+
+    .article-signoff {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .article-signoff p {
+      margin-top: 1rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .article-newsletter {
+      background: var(--primary-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      margin-top: 3rem;
+    }
+
+    .article-newsletter h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      margin: 0 0 0.5rem;
+    }
+
+    .article-newsletter p {
+      margin: 0 0 1.25rem;
+      color: var(--muted);
+    }
+
+    .article-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .article-back:hover { color: var(--text); }
+
+    @media (max-width: 540px) {
+      .findings-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VD4V5PJECV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VD4V5PJECV');
+  </script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="site-brand"><a href="../index.html">Ankush Arya</a></div>
+      <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Open navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="primary-navigation" class="primary-navigation" aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../projects.html">Projects</a></li>
+          <li><a href="../newsletter.html">Newsletter</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <article aria-labelledby="article-title">
+
+        <a href="../newsletter.html" class="article-back">← She Knows Too Much</a>
+
+        <header class="article-hero">
+          <p class="eyebrow">She Knows Too Much</p>
+          <h1 id="article-title">Customer Churn: Applying Logistic Regression with R</h1>
+          <div class="article-meta">
+            <span class="topic-tag">Data Analysis</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <span>Ankush Arya</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <time datetime="2022-11-26">November 26, 2022</time>
+          </div>
+          <p class="article-lede">Using logistic regression in R to understand why telecom customers leave — from exploratory analysis through model selection via likelihood ratio tests to actionable conclusions</p>
+          <img src="images/customer-churn.jpg" alt="Customer churn analysis — telecom dataset visualisation" class="article-featured-image">
+        </header>
+
+        <div class="article-body">
+
+          <h2>Introduction</h2>
+
+          <p>Churn is the term for the natural and inevitable way that a business loses customers. In this article, I show how to apply data modelling with R to find out what causes customers to leave and how to build a predictive model.</p>
+
+          <p>The dataset covers a telecom provider's customers, including demographic information (age, gender, marital status) and transaction information (monthly charges, internet service, payment method). The goal is to identify which factors are significantly associated with the probability of a customer churning.</p>
+
+          <h2>Exploratory Data Analysis</h2>
+
+          <p>The telecoms churn dataset contains 512 observations across seven predictors, with a binary response variable called <code>churn</code>. Gender, Partner, Payment Method, and Internet Service are categorical variables. Monthly charges is a continuous variable.</p>
+
+          <p>Only <strong>16.60%</strong> of total customers in the dataset churned in the last two years — an important baseline to keep in mind when interpreting the model.</p>
+
+          <div class="findings-grid">
+            <div class="finding-card fc-neutral">
+              <strong>Gender</strong>
+              More male customers in the dataset, but churning percentage is similar to female customers.
+            </div>
+            <div class="finding-card fc-negative">
+              <strong>Internet Service</strong>
+              Fibre Optic and DSL have similar churn rates. Customers with no internet service churn significantly less.
+            </div>
+            <div class="finding-card fc-negative">
+              <strong>Partner Status</strong>
+              Customers living with a partner have a higher churn rate than those without.
+            </div>
+            <div class="finding-card fc-negative">
+              <strong>Payment Method</strong>
+              Electronic check customers have the highest churn rate compared to all other payment methods.
+            </div>
+          </div>
+
+          <p>Binning the monthly charges reveals a further pattern: customers paying between £35.6–£52.2 and between £68.7–£85.2 per month show notably higher churn percentages than those in adjacent bands.</p>
+
+          <h2>Logistic Model</h2>
+
+          <p>The logistic model was fitted with <code>churn</code> as the response variable, using Gender, Internet Service, Partner, and Payment Method as categorical predictors, and monthly charges as a continuous predictor. Customer ID was excluded as it carries no behavioural information.</p>
+
+          <div class="formula-block">
+            ηᵢ = β₀ + β₁·(maleᵢ) + β₂·(fiberopticᵢ) + β₃·(no_internetᵢ)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;+ β₄·(partnerᵢ) + β₅·(credit_cardᵢ) + β₆·(electronic_checkᵢ)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;+ β₇·(mailed_checkᵢ) + ϵᵢ
+          </div>
+
+          <p>Where ηᵢ is the linear predictor of churning, and each dummy variable equals 1 when the observation matches the stated condition and 0 otherwise. The inverse logit function constrains the output to lie between 0 and 1, giving <em>Prob(yᵢ = 1)</em> — the probability of a customer churning.</p>
+
+          <div class="article-pull">
+            <p>A male customer, living with a partner, monthly charges of £70, fibre optic internet, credit card payment — estimated churn probability: <strong>0.226</strong>.</p>
+          </div>
+
+          <p>Key findings from the initial model:</p>
+          <ul>
+            <li><strong>Gender</strong> — no strong evidence of association (p = 0.410)</li>
+            <li><strong>Fibre optic internet</strong> — positively associated with churning vs DSL (p = 0.0008)</li>
+            <li><strong>No internet service</strong> — negatively associated with churning vs DSL (p &lt; 0.0001)</li>
+            <li><strong>Living with a partner</strong> — negatively associated with churning (p = 0.012)</li>
+            <li><strong>Monthly charges</strong> — each unit increase slightly reduces churn probability (p &lt; 0.0001)</li>
+            <li><strong>Electronic check payment</strong> — positively associated with churning (p = 0.0006)</li>
+            <li><strong>Credit card / mailed check</strong> — no strong evidence of association</li>
+          </ul>
+
+          <h2>Model Building via LRT</h2>
+
+          <p>Starting with all predictors, the <code>drop1</code> function was used to iteratively remove the least significant predictor until all remaining predictors were significant. The Log-likelihood Ratio Test (LRT) was used at each stage to test whether each predictor could be dropped without significant loss of fit.</p>
+
+          <p>Gender was identified as non-significant and removed. All remaining predictors — Internet Service, Partner, Payment Method, and Monthly Charges — were retained in the final model.</p>
+
+          <h3>Final Model — Key Odds Ratios</h3>
+
+          <p><strong>Bank transfer vs credit card:</strong> No significant difference in churn impact (p = 0.221). We fail to reject H₀.</p>
+
+          <p><strong>Fibre optic vs DSL:</strong> Significantly different (p = 0.0009). A customer with fibre optic is <strong>0.18× less likely</strong> to churn than a DSL customer (95% CI: 0.06 to 0.49).</p>
+
+          <p><strong>Living with a partner vs without:</strong> Significantly different (p = 0.009). A customer living with a partner is <strong>0.50× less likely</strong> to churn (95% CI: 0.29 to 0.84).</p>
+
+          <h2>Conclusion</h2>
+
+          <p>The analysis shows that 16.60% of customers churned. Gender had no meaningful effect. Customers with no internet service were the least likely to churn — the strongest signal in the dataset (p &lt; 0.0001). Customers with a partner churned at roughly half the rate of those without.</p>
+
+          <p>Monthly charges show a narrow but significant negative effect (95% CI: −0.072 to −0.027), suggesting that as charges increase, churn probability marginally decreases — though the practical interpretation requires care.</p>
+
+          <p>The most actionable finding from the binned charges analysis: customers paying between £85.2 and £118 per month are significantly more likely to churn than those paying £19–£35.6. <strong>Discounting monthly charges below £85.2 for high-value customers could meaningfully reduce churn risk.</strong></p>
+
+          <div class="tag-list" aria-label="Article tags">
+            <span>R</span>
+            <span>CustomerChurn</span>
+            <span>LogisticRegression</span>
+            <span>DataAnalysis</span>
+            <span>Statistics</span>
+          </div>
+
+          <div class="article-signoff">
+            <p><em>She Knows Too Much is a newsletter about data, leadership, and the messy middle of a career that refuses to sit still. Written from Dublin, usually after too much coffee.</em></p>
+          </div>
+
+        </div>
+
+        <div class="article-newsletter" aria-label="Newsletter subscription">
+          <h2>She Knows Too Much</h2>
+          <p>Data, analytics, and AI insights for practitioners and curious minds. No noise, no hype — just the things worth thinking about.</p>
+          <form class="signup-form" action="https://your-mail-service.com/replace-me" method="post" aria-label="Newsletter subscribe form" style="max-width: 30rem;">
+            <label for="email-article">Email address</label>
+            <input id="email-article" type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+            <button class="button button-primary" type="submit">Subscribe — it's free</button>
+          </form>
+        </div>
+
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <p>Subscribe for updates from <strong>She Knows Too Much</strong>, a newsletter on data, analytics, and AI.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/arya-ankush/" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/mystic-monk" target="_blank" rel="noopener" aria-label="GitHub profile">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a href="https://x.com/ankush_arya26" target="_blank" rel="noopener" aria-label="Twitter / X profile">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </div>
+      <p class="copyright">© 2026 Ankush Arya. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const menuButton = document.querySelector('.menu-toggle');
+    const navMenu = document.getElementById('primary-navigation');
+    menuButton.addEventListener('click', () => {
+      const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!expanded));
+      navMenu.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
