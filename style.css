@@ -479,6 +479,13 @@ button {
   line-height: 1.35;
 }
 
+.co-logo-img {
+  height: 60px;
+  width: auto;
+  max-width: 110px;
+  object-fit: contain;
+}
+
 /* Social icon buttons on contact page */
 .social-icon-buttons {
   display: flex;
