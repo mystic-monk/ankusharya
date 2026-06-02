@@ -223,6 +223,25 @@
 
     .article-back:hover { color: var(--text); }
 
+    .article-figure {
+      margin: 1.75rem 0;
+    }
+
+    .article-figure img {
+      width: 100%;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      display: block;
+    }
+
+    .article-figure figcaption {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+      font-style: italic;
+      text-align: center;
+    }
+
     @media (max-width: 540px) {
       .findings-grid { grid-template-columns: 1fr; }
     }
@@ -287,6 +306,13 @@
 
           <p>Only <strong>16.60%</strong> of total customers in the dataset churned in the last two years — an important baseline to keep in mind when interpreting the model.</p>
 
+          <figure class="article-figure">
+            <img src="images/churn-figure-1.jpg" alt="Figure 1: Customer churn rate — 16.60% of customers churned in the last two years">
+            <figcaption>Figure 1: Overall churn rate in the dataset — 16.60% of customers churned</figcaption>
+          </figure>
+
+          <p>Figure 2 shows the breakdown of the categorical variables on customer churn.</p>
+
           <div class="findings-grid">
             <div class="finding-card fc-neutral">
               <strong>Gender</strong>
@@ -305,6 +331,16 @@
               Electronic check customers have the highest churn rate compared to all other payment methods.
             </div>
           </div>
+
+          <figure class="article-figure">
+            <img src="images/churn-figure-2.jpg" alt="Figure 2: Breakdown of categorical variables — gender, internet service, partner status, and payment method by churn">
+            <figcaption>Figure 2: Churn breakdown by gender, internet service, partner status, and payment method</figcaption>
+          </figure>
+
+          <figure class="article-figure">
+            <img src="images/churn-figure-3.jpg" alt="Figure 3: Monthly charges spread with binned churn rates">
+            <figcaption>Figure 3: Monthly charges distribution — customers in the £35.6–£52.2 and £68.7–£85.2 bands show higher churn rates</figcaption>
+          </figure>
 
           <p>Binning the monthly charges reveals a further pattern: customers paying between £35.6–£52.2 and between £68.7–£85.2 per month show notably higher churn percentages than those in adjacent bands.</p>
 
@@ -338,6 +374,11 @@
           <h2>Model Building via LRT</h2>
 
           <p>Starting with all predictors, the <code>drop1</code> function was used to iteratively remove the least significant predictor until all remaining predictors were significant. The Log-likelihood Ratio Test (LRT) was used at each stage to test whether each predictor could be dropped without significant loss of fit.</p>
+
+          <figure class="article-figure">
+            <img src="images/churn-table-1.jpg" alt="Table 1: Log-likelihood Ratio Test results showing significance of each predictor">
+            <figcaption>Table 1: Log-likelihood Ratio Test results — Gender is not significant and can be removed; all other predictors are significant</figcaption>
+          </figure>
 
           <p>Gender was identified as non-significant and removed. All remaining predictors — Internet Service, Partner, Payment Method, and Monthly Charges — were retained in the final model.</p>
 
