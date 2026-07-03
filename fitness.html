@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ankush Arya's personal fitness tracker — a 4-day rotating Total Body split with a workout plan reference and progress log.">
+  <meta property="og:title" content="Ankush Arya | Fitness Tracker">
+  <meta property="og:description" content="Personal workout plan reference and progress tracker for a 4-day rotating Total Body split.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ankusharya.dev/fitness.html">
+  <link rel="canonical" href="https://ankusharya.dev/fitness.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Ankush Arya | Fitness Tracker</title>
+  <!-- Replace G-VD4V5PJECV with your actual GA4 Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VD4V5PJECV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VD4V5PJECV');
+  </script>
+  <style>
+    .fitness-tracker {
+      margin-top: 2rem;
+    }
+
+    .session-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+    }
+
+    .session-tab {
+      padding: 0.6rem 1.35rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .session-tab:hover,
+    .session-tab:focus-visible {
+      color: var(--text);
+      outline: none;
+    }
+
+    .session-tab[aria-pressed="true"] {
+      background: var(--text);
+      color: #fff;
+      border-color: var(--text);
+    }
+
+    .session-panel[hidden] {
+      display: none;
+    }
+
+    .session-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin: 2rem 0 1rem;
+    }
+
+    .session-panel .session-title:first-child {
+      margin-top: 0;
+    }
+
+    .plan-card {
+      display: grid;
+      gap: 1.75rem;
+    }
+
+    .plan-block h3 {
+      margin: 0 0 0.75rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+    }
+
+    .plan-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      min-width: 420px;
+    }
+
+    .plan-table th {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .plan-table th,
+    .plan-table td {
+      text-align: left;
+      padding: 0.55rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .plan-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .cooldown-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .cooldown-list li {
+      background: var(--primary-soft);
+      color: var(--text);
+      padding: 0.4rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+    }
+
+    .log-date-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .log-date-row > div {
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .log-date-row input[type="date"] {
+      width: auto;
+    }
+
+    .save-status {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .log-card {
+      margin-bottom: 1.5rem;
+    }
+
+    .log-card h3 {
+      margin: 0 0 1rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+    }
+
+    .log-row {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 0.8fr 1.4fr auto;
+      gap: 0.75rem;
+      align-items: center;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .log-row:last-child {
+      border-bottom: none;
+    }
+
+    .log-row.is-incomplete {
+      opacity: 0.55;
+    }
+
+    .ex-name {
+      font-weight: 600;
+    }
+
+    .ex-target {
+      display: block;
+      font-weight: 400;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+
+    .log-row input[type="text"] {
+      padding: 0.55rem 0.7rem;
+      font-size: 0.9rem;
+      border-radius: 0.65rem;
+    }
+
+    .incomplete-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .incomplete-toggle input {
+      width: auto;
+    }
+
+    .history-row {
+      grid-column: 1 / -1;
+    }
+
+    .history-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .history-chip {
+      background: var(--surface-strong);
+      color: var(--muted);
+      font-size: 0.78rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+    }
+
+    .history-empty {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin: 0.5rem 0 0;
+      font-style: italic;
+    }
+
+    @media (max-width: 779px) {
+      .log-row {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .ex-name,
+      .history-row,
+      .incomplete-toggle {
+        grid-column: 1 / -1;
+      }
+    }
+  </style>
+</head>
+<body id="page-fitness">
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="site-brand"><a href="index.html">Ankush Arya</a></div>
+      <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Open navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="primary-navigation" class="primary-navigation" aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="newsletter.html">Newsletter</a></li>
+          <li><a href="fitness.html" aria-current="page">Fitness</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero hero-fitness" aria-labelledby="fitness-title">
+        <h1 id="fitness-title">Fitness Tracker</h1>
+        <p class="hero-text">My 4-day rotating Total Body split (B1_1&ndash;B1_4) &mdash; plan reference and workout log, for personal training use.</p>
+      </section>
+
+      <section class="fitness-tracker" aria-label="Workout sessions">
+        <div class="session-tabs" role="tablist" aria-label="Select session">
+          <button type="button" class="session-tab" data-target="b1_1" aria-pressed="true">B1_1</button>
+          <button type="button" class="session-tab" data-target="b1_2" aria-pressed="false">B1_2</button>
+          <button type="button" class="session-tab" data-target="b1_3" aria-pressed="false">B1_3</button>
+          <button type="button" class="session-tab" data-target="b1_4" aria-pressed="false">B1_4</button>
+        </div>
+
+        <div id="panel-b1_1" class="session-panel">
+          <h2 class="session-title">B1_1 &mdash; Total Body</h2>
+          <div id="plan-b1_1"></div>
+          <h2 class="session-title">Log This Workout</h2>
+          <div id="log-b1_1"></div>
+        </div>
+        <div id="panel-b1_2" class="session-panel" hidden>
+          <h2 class="session-title">B1_2 &mdash; Total Body</h2>
+          <div id="plan-b1_2"></div>
+          <h2 class="session-title">Log This Workout</h2>
+          <div id="log-b1_2"></div>
+        </div>
+        <div id="panel-b1_3" class="session-panel" hidden>
+          <h2 class="session-title">B1_3 &mdash; Total Body</h2>
+          <div id="plan-b1_3"></div>
+          <h2 class="session-title">Log This Workout</h2>
+          <div id="log-b1_3"></div>
+        </div>
+        <div id="panel-b1_4" class="session-panel" hidden>
+          <h2 class="session-title">B1_4 &mdash; Total Body</h2>
+          <div id="plan-b1_4"></div>
+          <h2 class="session-title">Log This Workout</h2>
+          <div id="log-b1_4"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <p>Subscribe for updates from <strong>She Knows Too Much</strong>, a newsletter on data, analytics, and AI.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/arya-ankush/" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/mystic-monk" target="_blank" rel="noopener" aria-label="GitHub profile">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a href="https://x.com/ankush_arya26" target="_blank" rel="noopener" aria-label="Twitter / X profile">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </div>
+      <p class="copyright">© 2026 Ankush Arya. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const menuButton = document.querySelector('.menu-toggle');
+    const navMenu = document.getElementById('primary-navigation');
+    menuButton.addEventListener('click', () => {
+      const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!expanded));
+      navMenu.classList.toggle('open');
+    });
+  </script>
+
+  <script>
+  (function () {
+    const STORAGE_KEY = 'fitnessTrackerLogs_v1';
+
+    function ex(id, name, sets, reps, unit, weight) {
+      return { id, name, sets, reps, unit, weight };
+    }
+
+    // NOTE: sets / reps / weight values below are placeholders — edit this
+    // PLAN object with your actual targets for each exercise. This is the
+    // only place that data lives.
+    const PLAN = {
+      b1_1: {
+        warmup: ex('b1_1-warmup-cross-trainer', 'Cross Trainer', 1, 10, 'min', 'Steady pace'),
+        groups: [
+          { name: 'Legs', exercises: [
+            ex('b1_1-legs-lunge-walks', 'Lunge Walks', 3, 12, 'reps', 'Bodyweight'),
+            ex('b1_1-legs-goblet-squat', 'Goblet Squat', 3, 10, 'reps', 'KB'),
+            ex('b1_1-legs-stepups-boxjumps', 'Step-Ups / Box Jumps', 3, 10, 'reps', 'Bodyweight'),
+            ex('b1_1-legs-kb-swings', 'KB Swings', 3, 15, 'reps', 'KB'),
+          ]},
+          { name: 'Chest', exercises: [
+            ex('b1_1-chest-press', 'Chest Press', 3, 10, 'reps', 'Machine'),
+            ex('b1_1-chest-pushups', 'Push-Ups', 3, 10, 'reps', 'Bodyweight'),
+          ]},
+          { name: 'Back', exercises: [
+            ex('b1_1-back-lat-pulldown', 'Lat Pulldown', 3, 10, 'reps', 'Machine'),
+          ]},
+          { name: 'Compound', exercises: [
+            ex('b1_1-compound-mb-slams', 'Medicine Ball Slams', 3, 12, 'reps', 'Med Ball'),
+            ex('b1_1-compound-box-pushes', 'Box Pushes', 3, 10, 'reps', 'Box'),
+          ]},
+          { name: 'Core', exercises: [
+            ex('b1_1-core-plank', 'Plank', 3, 30, 'sec', 'Bodyweight'),
+            ex('b1_1-core-mountain-climbers', 'Mountain Climbers', 3, 20, 'reps', 'Bodyweight'),
+            ex('b1_1-core-walkouts', 'Walk-Outs', 3, 8, 'reps', 'Bodyweight'),
+          ]},
+        ],
+        cooldown: ['Hip Flexor Stretch', 'Chest Doorway Stretch', 'Cat-Cow'],
+      },
+      b1_2: {
+        warmup: ex('b1_2-warmup-treadmill', 'Treadmill', 1, 10, 'min', 'Steady pace'),
+        groups: [
+          { name: 'Legs', exercises: [
+            ex('b1_2-legs-farmers-walk', 'Farmers Walk', 3, 30, 'sec', 'Heavy DB/KB'),
+            ex('b1_2-legs-stepups', 'Step-Ups', 3, 10, 'reps', 'Bodyweight'),
+            ex('b1_2-legs-squat-holds', 'Squat Holds', 3, 30, 'sec', 'Bodyweight'),
+            ex('b1_2-legs-legpress-goblet-superset', 'Leg Press / Goblet Squat (Superset)', 3, 10, 'reps', 'Machine + KB'),
+            ex('b1_2-legs-trx-squats', 'TRX Squats', 3, 10, 'reps', 'TRX'),
+            ex('b1_2-legs-trx-reverse-squats', 'TRX Reverse Squats', 3, 10, 'reps', 'TRX'),
+          ]},
+          { name: 'Chest', exercises: [
+            ex('b1_2-chest-press-machine', 'Chest Press Machine', 3, 10, 'reps', 'Machine'),
+          ]},
+          { name: 'Shoulders', exercises: [
+            ex('b1_2-shoulders-press-machine', 'Shoulder Press Machine', 3, 10, 'reps', 'Machine'),
+          ]},
+          { name: 'Core', exercises: [
+            ex('b1_2-core-scissors', 'Scissors', 3, 20, 'reps', 'Bodyweight'),
+            ex('b1_2-core-bird-dog', 'Bird Dog', 3, 10, 'reps', 'Bodyweight'),
+            ex('b1_2-core-bridge', 'Bridge', 3, 30, 'sec', 'Bodyweight'),
+          ]},
+        ],
+        cooldown: ['Hamstring / Quad Stretch', 'Shoulder Cross-Body Stretch'],
+      },
+      b1_3: {
+        warmup: ex('b1_3-warmup-cross-trainer', 'Cross Trainer', 1, 10, 'min', 'Steady pace'),
+        groups: [
+          { name: 'Legs', exercises: [
+            ex('b1_3-legs-kneel-to-stand-ohp', 'Kneel-to-Stand w/ Overhead Press', 3, 10, 'reps', 'DB'),
+            ex('b1_3-legs-single-arm-clean-press', 'Single-Arm Clean & Press', 3, 8, 'reps', 'KB'),
+            ex('b1_3-legs-hamstring-curls', 'Hamstring Curls', 3, 12, 'reps', 'Machine'),
+            ex('b1_3-legs-toe-taps', 'Toe Taps', 3, 20, 'reps', 'Box/Step'),
+            ex('b1_3-legs-lateral-jumps', 'Lateral Jumps', 3, 12, 'reps', 'Bodyweight'),
+            ex('b1_3-legs-box-jumps', 'Box Jumps', 3, 10, 'reps', 'Box'),
+            ex('b1_3-legs-leg-extension', 'Leg Extension', 3, 12, 'reps', 'Machine'),
+            ex('b1_3-legs-static-lunges', 'Static Lunges', 3, 10, 'reps', 'Bodyweight/DB'),
+          ]},
+          { name: 'Cardio', exercises: [
+            ex('b1_3-cardio-battle-ropes', 'Battle Ropes', 3, 30, 'sec', '—'),
+            ex('b1_3-cardio-cross-bike', 'Cross Bike', 1, 5, 'min', 'Moderate resistance'),
+            ex('b1_3-cardio-rowing-machine', 'Rowing Machine', 1, 5, 'min', 'Moderate pace'),
+            ex('b1_3-cardio-stair-master', 'Stair Master', 1, 5, 'min', 'Level'),
+          ]},
+          { name: 'Core', exercises: [
+            ex('b1_3-core-plank-knee-touch', 'Plank Knee-Touch', 3, 20, 'reps', 'Bodyweight'),
+            ex('b1_3-core-side-plank-variations', 'Side Plank Variations', 3, 30, 'sec', 'Bodyweight'),
+          ]},
+        ],
+        cooldown: ['Calf Stretch', 'Side-Body / Mermaid Stretch'],
+      },
+      b1_4: {
+        warmup: ex('b1_4-warmup-treadmill', 'Treadmill', 1, 10, 'min', 'Steady pace'),
+        groups: [
+          { name: 'Full Body', exercises: [
+            ex('b1_4-fullbody-clean-press', 'Clean & Press', 3, 8, 'reps', 'KB'),
+            ex('b1_4-fullbody-wood-choppers', 'Wood Choppers', 3, 12, 'reps', 'Cable/Med Ball'),
+            ex('b1_4-fullbody-kb-swings', 'KB Swings', 3, 15, 'reps', 'KB'),
+          ]},
+          { name: 'Legs', exercises: [
+            ex('b1_4-legs-trx-reverse-lunge-kick', 'TRX Reverse Lunge w/ Kick', 3, 10, 'reps', 'TRX'),
+            ex('b1_4-legs-pistol-squats', 'Pistol Squats', 3, 6, 'reps', 'Bodyweight'),
+            ex('b1_4-legs-jump-squats', 'Jump Squats', 3, 12, 'reps', 'Bodyweight'),
+          ]},
+          { name: 'Chest', exercises: [
+            ex('b1_4-chest-press', 'Chest Press', 3, 10, 'reps', 'Machine'),
+          ]},
+          { name: 'Back', exercises: [
+            ex('b1_4-back-one-arm-landmine-row', 'One-Arm Landmine Row', 3, 10, 'reps', 'Landmine'),
+          ]},
+          { name: 'Shoulders', exercises: [
+            ex('b1_4-shoulders-press', 'Shoulder Press', 3, 10, 'reps', 'Machine'),
+          ]},
+          { name: 'Cardio', exercises: [
+            ex('b1_4-cardio-stair-master', 'Stair Master', 1, 5, 'min', 'Level'),
+          ]},
+          { name: 'Core', exercises: [
+            ex('b1_4-core-leg-drops', 'Leg Drops', 3, 12, 'reps', 'Bodyweight'),
+            ex('b1_4-core-cross-crunch', 'Cross Crunch', 3, 20, 'reps', 'Bodyweight'),
+            ex('b1_4-core-half-getup', 'Half Get-Up', 3, 6, 'reps/side', 'KB'),
+          ]},
+        ],
+        cooldown: ['Thoracic Rotation', 'Glute Stretch', 'Spinal Twist'],
+      },
+    };
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, (c) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+      }[c]));
+    }
+
+    function allExercisesOf(session) {
+      return [session.warmup, ...session.groups.flatMap((g) => g.exercises)];
+    }
+
+    function loadLogs() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveLogs(logs) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+    }
+
+    function todayISO() {
+      const d = new Date();
+      const pad = (n) => String(n).padStart(2, '0');
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+    }
+
+    function formatDate(iso) {
+      const d = new Date(iso + 'T00:00:00');
+      if (isNaN(d.getTime())) return iso;
+      return d.toLocaleDateString('en-IE', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    function targetLabel(exercise) {
+      return `${exercise.sets} × ${exercise.reps} ${exercise.unit}`;
+    }
+
+    function historyHtml(exerciseId) {
+      const logs = loadLogs();
+      const entries = (logs[exerciseId] || []).slice(0, 5);
+      if (!entries.length) {
+        return '<p class="history-empty">No entries logged yet.</p>';
+      }
+      return '<div class="history-chips">' + entries.map((entry) => {
+        const label = entry.incomplete
+          ? `${formatDate(entry.date)}: Incomplete`
+          : `${formatDate(entry.date)}: ${escapeHtml(entry.weight || '—')} × ${escapeHtml(entry.reps || '—')}`;
+        return `<span class="history-chip" title="${escapeHtml(entry.notes || '')}">${label}</span>`;
+      }).join('') + '</div>';
+    }
+
+    function planPanelHtml(session) {
+      const allGroups = [{ name: 'Warm-up', exercises: [session.warmup] }, ...session.groups];
+      const groupsHtml = allGroups.map((group) => `
+        <div class="plan-block">
+          <h3>${escapeHtml(group.name)}</h3>
+          <div class="table-scroll">
+            <table class="plan-table">
+              <thead>
+                <tr><th>Exercise</th><th>Sets × Reps</th><th>Load / Equipment</th></tr>
+              </thead>
+              <tbody>
+                ${group.exercises.map((exercise) => `
+                  <tr>
+                    <td>${escapeHtml(exercise.name)}</td>
+                    <td>${targetLabel(exercise)}</td>
+                    <td>${escapeHtml(exercise.weight)}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `).join('');
+
+      const cooldownHtml = `
+        <div class="plan-block">
+          <h3>Cooldown Stretches</h3>
+          <ul class="cooldown-list">
+            ${session.cooldown.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+
+      return `<div class="card plan-card">${groupsHtml}${cooldownHtml}</div>`;
+    }
+
+    function logRowHtml(exercise) {
+      return `
+        <div class="log-row" data-exercise-id="${exercise.id}">
+          <div class="ex-name">${escapeHtml(exercise.name)}
+            <span class="ex-target">Target: ${targetLabel(exercise)} · ${escapeHtml(exercise.weight)}</span>
+          </div>
+          <input type="text" class="log-weight" value="${escapeHtml(exercise.weight)}" aria-label="${escapeHtml(exercise.name)} weight or load">
+          <input type="text" class="log-reps" value="${exercise.reps}" aria-label="${escapeHtml(exercise.name)} reps">
+          <input type="text" class="log-notes" placeholder="Notes" aria-label="${escapeHtml(exercise.name)} notes">
+          <label class="incomplete-toggle">
+            <input type="checkbox" class="log-incomplete"> Incomplete
+          </label>
+          <div class="history-row">${historyHtml(exercise.id)}</div>
+        </div>
+      `;
+    }
+
+    function logPanelHtml(session, sessionKey) {
+      const allGroups = [{ name: 'Warm-up', exercises: [session.warmup] }, ...session.groups];
+      const groupsHtml = allGroups.map((group) => `
+        <div class="card log-card">
+          <h3>${escapeHtml(group.name)}</h3>
+          ${group.exercises.map(logRowHtml).join('')}
+        </div>
+      `).join('');
+
+      return `
+        <div class="log-date-row">
+          <div>
+            <label for="log-date-${sessionKey}">Workout date</label>
+            <input type="date" id="log-date-${sessionKey}" class="log-date" value="${todayISO()}">
+          </div>
+          <button type="button" class="button button-primary log-save" data-session="${sessionKey}">Save Workout</button>
+          <span class="save-status" data-session-status="${sessionKey}"></span>
+        </div>
+        ${groupsHtml}
+      `;
+    }
+
+    function renderSession(sessionKey) {
+      const session = PLAN[sessionKey];
+      const planContainer = document.getElementById(`plan-${sessionKey}`);
+      const logContainer = document.getElementById(`log-${sessionKey}`);
+      if (planContainer) planContainer.innerHTML = planPanelHtml(session);
+      if (logContainer) logContainer.innerHTML = logPanelHtml(session, sessionKey);
+    }
+
+    function saveWorkout(sessionKey) {
+      const session = PLAN[sessionKey];
+      const panel = document.getElementById(`panel-${sessionKey}`);
+      if (!panel) return;
+      const dateInput = panel.querySelector('.log-date');
+      const dateValue = (dateInput && dateInput.value) || todayISO();
+      const logs = loadLogs();
+
+      allExercisesOf(session).forEach((exercise) => {
+        const row = panel.querySelector(`.log-row[data-exercise-id="${exercise.id}"]`);
+        if (!row) return;
+        const entry = {
+          date: dateValue,
+          weight: row.querySelector('.log-weight').value.trim(),
+          reps: row.querySelector('.log-reps').value.trim(),
+          notes: row.querySelector('.log-notes').value.trim(),
+          incomplete: row.querySelector('.log-incomplete').checked,
+        };
+        if (!logs[exercise.id]) logs[exercise.id] = [];
+        logs[exercise.id].unshift(entry);
+      });
+
+      saveLogs(logs);
+      renderSession(sessionKey);
+
+      const status = panel.querySelector(`[data-session-status="${sessionKey}"]`);
+      if (status) {
+        status.textContent = 'Saved ✓';
+        setTimeout(() => { status.textContent = ''; }, 3000);
+      }
+    }
+
+    document.addEventListener('click', (event) => {
+      const tab = event.target.closest('.session-tab');
+      if (tab) {
+        const target = tab.getAttribute('data-target');
+        document.querySelectorAll('.session-tab').forEach((t) => {
+          t.setAttribute('aria-pressed', String(t === tab));
+        });
+        document.querySelectorAll('.session-panel').forEach((panel) => {
+          panel.hidden = panel.id !== `panel-${target}`;
+        });
+        return;
+      }
+
+      const saveBtn = event.target.closest('.log-save');
+      if (saveBtn) {
+        saveWorkout(saveBtn.getAttribute('data-session'));
+      }
+    });
+
+    document.addEventListener('change', (event) => {
+      if (event.target.classList.contains('log-incomplete')) {
+        const row = event.target.closest('.log-row');
+        if (row) row.classList.toggle('is-incomplete', event.target.checked);
+      }
+    });
+
+    Object.keys(PLAN).forEach(renderSession);
+  })();
+  </script>
+</body>
+</html>

@@ -160,6 +160,7 @@ button {
 #page-about .nav-list a[href="about.html"],
 #page-projects .nav-list a[href="projects.html"],
 #page-newsletter .nav-list a[href="newsletter.html"],
+#page-fitness .nav-list a[href="fitness.html"],
 #page-contact .nav-list a[href="contact.html"] {
   color: var(--text);
   font-weight: 700;
