@@ -175,6 +175,10 @@
       border-bottom: 1px solid var(--border);
     }
 
+    .log-row > * {
+      min-width: 0;
+    }
+
     .log-row:last-child {
       border-bottom: none;
     }
@@ -197,7 +201,7 @@
 
     .log-row input[type="text"] {
       padding: 0.55rem 0.7rem;
-      font-size: 0.9rem;
+      font-size: 1rem;
       border-radius: 0.65rem;
     }
 
@@ -249,6 +253,17 @@
       .history-row,
       .incomplete-toggle {
         grid-column: 1 / -1;
+      }
+
+      .plan-table {
+        min-width: 0;
+        table-layout: fixed;
+      }
+
+      .plan-table td,
+      .plan-table th {
+        padding: 0.5rem;
+        word-break: break-word;
       }
     }
   </style>
