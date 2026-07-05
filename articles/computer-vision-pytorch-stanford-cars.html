@@ -242,10 +242,9 @@
             <span class="sep" aria-hidden="true">·</span>
             <time datetime="2024-05-11">May 11, 2024</time>
           </div>
-          <p class="article-lede">Building a TinyVGG architecture with PyTorch and training it on 16,185 car images across 196 classes — from dataset loading to model evaluation</p>
-          <img src="images/cars-models.jpg" alt="Stanford Cars dataset — vehicle classification model" class="article-featured-image">
+          <p class="article-lede">Building a TinyVGG architecture with PyTorch and training it on 16,185 car images across 196 classes, from dataset loading to model evaluation</p>
+          <img src="images/cars-models.jpg" alt="Stanford Cars dataset, vehicle classification model" class="article-featured-image">
           <div class="article-links">
-            <a class="button button-secondary" href="https://www.kaggle.com" target="_blank" rel="noopener">View on Kaggle</a>
             <a class="button button-secondary" href="https://github.com/mystic-monk" target="_blank" rel="noopener">View on GitHub</a>
           </div>
         </header>
@@ -254,7 +253,7 @@
 
           <h2>Introduction</h2>
 
-          <p>In the rapidly advancing field of computer vision, new breakthroughs constantly reshape the boundaries of what is possible. Among these milestones is the creation of a PyTorch framework. In this article, I detail the development of the TinyVGG architecture and its training on the Stanford Cars dataset — uncovering the implications for vehicle recognition and the practical lessons learned along the way.</p>
+          <p>In the rapidly advancing field of computer vision, new breakthroughs constantly reshape the boundaries of what is possible. Among these milestones is the creation of a PyTorch framework. In this article, I detail the development of the TinyVGG architecture and its training on the Stanford Cars dataset, uncovering the implications for vehicle recognition and the practical lessons learned along the way.</p>
 
           <h2>Data</h2>
 
@@ -264,7 +263,7 @@
 
           <h2>Dataset Class and Transforms</h2>
 
-          <p>The <code>StanfordCarsCustom</code> class manages image datasets through structured access and handling of image data. Error handling ensures robustness, enabling seamless data loading even when files are corrupted or missing. Custom transformations — resizing, RGB conversion, and data augmentation — tailor the dataset to the model's needs.</p>
+          <p>The <code>StanfordCarsCustom</code> class manages image datasets through structured access and handling of image data. Error handling ensures robustness, enabling seamless data loading even when files are corrupted or missing. Custom transformations (resizing, RGB conversion, and data augmentation) tailor the dataset to the model's needs.</p>
 
 <pre><code>class StanfordCarsCustom(Dataset):
     """Custom Image Dataset for PyTorch."""
@@ -304,7 +303,7 @@
 
           <h3>Transforms</h3>
 
-<pre><code># Training transform — with augmentation
+<pre><code># Training transform, with augmentation
 train_transform = transforms.Compose([
     transforms.Resize((64, 64)),
     transforms.Lambda(lambda img: img.convert('RGB') if img.mode != 'RGB' else img),
@@ -313,7 +312,7 @@ train_transform = transforms.Compose([
     transforms.ToTensor()
 ])
 
-# Testing transform — no augmentation
+# Testing transform, no augmentation
 test_transform = transforms.Compose([
     transforms.Resize((64, 64)),
     transforms.Lambda(lambda img: img.convert('RGB') if img.mode != 'RGB' else img),
@@ -322,16 +321,16 @@ test_transform = transforms.Compose([
 
           <h2>Training</h2>
 
-          <p>Two critical components drive training and evaluation: the TinyVGG architecture and the training/testing step functions. The TinyVGG class defines a compact neural network inspired by the VGG model, comprising convolutional and pooling layers followed by a classifier — offering a balance between efficiency and performance for image classification.</p>
+          <p>Two critical components drive training and evaluation: the TinyVGG architecture and the training/testing step functions. The TinyVGG class defines a compact neural network inspired by the VGG model, comprising convolutional and pooling layers followed by a classifier, offering a balance between efficiency and performance for image classification.</p>
 
           <p>The <code>train_step</code> and <code>test_step</code> functions orchestrate the forward pass, loss calculation, and optimisation steps, ensuring efficient model training and evaluation on each epoch.</p>
 
           <h2>Model Evaluation</h2>
 
-          <p>The training curves tell an encouraging story. The loss curve trends consistently downward across epochs, indicating the model is improving its fit to the training data. The accuracy curve trends upward in parallel — the model's ability to correctly classify car makes, models, and years improves with each cycle.</p>
+          <p>The training curves tell an encouraging story. The loss curve trends consistently downward across epochs, indicating the model is improving its fit to the training data. The accuracy curve trends upward in parallel. The model's ability to correctly classify car makes, models, and years improves with each cycle.</p>
 
           <div class="article-pull">
-            <p>A loss curve that falls and an accuracy curve that rises are necessary but not sufficient — the real test is always generalisation to unseen data.</p>
+            <p>A loss curve that falls and an accuracy curve that rises are necessary but not sufficient. The real test is always generalisation to unseen data.</p>
           </div>
 
           <p>Performance on training data does not guarantee performance on unseen examples. Evaluating against the held-out test split of 8,041 images gives a clearer picture of how well the model generalises beyond what it was trained on.</p>
@@ -339,10 +338,10 @@ test_transform = transforms.Compose([
           <h2>Next Steps</h2>
 
           <ol>
-            <li><strong>Modularise the code</strong> — break the codebase into modular components to improve readability, scalability, and maintainability, making debugging and future enhancements easier.</li>
-            <li><strong>Experiment with other architectures</strong> — explore alternative computer vision models beyond TinyVGG to evaluate performance trade-offs.</li>
-            <li><strong>Incorporate transfer learning</strong> — leverage pre-trained models fine-tuned on the Stanford Cars dataset to expedite training, improve accuracy, and reduce overfitting.</li>
-            <li><strong>Utilise PyTorch Lightning</strong> — transition to PyTorch Lightning for built-in experiment tracking, distributed training support, and automatic optimisation.</li>
+            <li><strong>Modularise the code:</strong> break the codebase into modular components to improve readability, scalability, and maintainability, making debugging and future enhancements easier.</li>
+            <li><strong>Experiment with other architectures:</strong> explore alternative computer vision models beyond TinyVGG to evaluate performance trade-offs.</li>
+            <li><strong>Incorporate transfer learning:</strong> leverage pre-trained models fine-tuned on the Stanford Cars dataset to expedite training, improve accuracy, and reduce overfitting.</li>
+            <li><strong>Utilise PyTorch Lightning:</strong> transition to PyTorch Lightning for built-in experiment tracking, distributed training support, and automatic optimisation.</li>
           </ol>
 
           <div class="tag-list" aria-label="Article tags">
@@ -362,11 +361,11 @@ test_transform = transforms.Compose([
 
         <div class="article-newsletter" aria-label="Newsletter subscription">
           <h2>She Knows Too Much</h2>
-          <p>Data, analytics, and AI insights for practitioners and curious minds. No noise, no hype — just the things worth thinking about.</p>
+          <p>Data, analytics, and AI insights for practitioners and curious minds. No noise, no hype, just the things worth thinking about.</p>
           <form class="signup-form" action="https://your-mail-service.com/replace-me" method="post" aria-label="Newsletter subscribe form" style="max-width: 30rem;">
             <label for="email-article">Email address</label>
             <input id="email-article" type="email" name="email" placeholder="you@example.com" required autocomplete="email">
-            <button class="button button-primary" type="submit">Subscribe — it's free</button>
+            <button class="button button-primary" type="submit">Subscribe for free</button>
           </form>
         </div>
 

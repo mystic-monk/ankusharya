@@ -9,8 +9,10 @@ A production-ready, static portfolio website showcasing BI leadership, analytics
 ├── index.html              Home page with hero and highlights
 ├── about.html              Professional background and timeline
 ├── projects.html           Project portfolio with Live Demo buttons
-├── newsletter.html         She Knows Too Much newsletter signup
-├── blog.html               Blog placeholder (coming soon)
+├── newsletter.html         She Knows Too Much newsletter index
+├── articles/               Individual newsletter articles
+├── fitness.html            Personal workout plan and progress tracker
+├── posters/                Standalone print-ready reference posters
 ├── contact.html            Contact form and social links
 ├── style.css               Single shared stylesheet
 ├── DEPLOYMENT.md           Step-by-step Render deployment guide
@@ -52,12 +54,12 @@ In `index.html`, replace the placeholder text in the hero section with your 2-se
 | `contact.html` | Formspree URL | Replace with your formspree.io endpoint |
 | `projects.html` | Render URLs | Update with live demo service URLs once deployed |
 
-### Add Blog Articles
+### Add Newsletter Articles
 
-1. Create new HTML file: `blog-article-title.html`
-2. Copy template from `blog.html`
+1. Create new HTML file in `articles/` (e.g. `articles/my-new-post.html`)
+2. Copy the template from an existing article in `articles/`
 3. Update main content
-4. Link from `blog.html`
+4. Link from `newsletter.html`
 5. Redeploy
 
 ## Domains

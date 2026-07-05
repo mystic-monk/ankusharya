@@ -151,21 +151,14 @@ Each of your 4 Python projects (Route Licensing, Bus Scorecard, RAG App, Intake 
 
 ---
 
-## Step 6: Add New Blog Articles
+## Step 6: Add New Newsletter Articles
 
-To add blog posts without a CMS:
+To add newsletter posts without a CMS:
 
-1. Create a new HTML file (e.g., `blog-my-first-post.html`)
-2. Copy the template from `blog.html`, keeping the header, nav, and footer
+1. Create a new HTML file in `articles/` (e.g., `articles/my-first-post.html`)
+2. Copy the template from an existing article in `articles/`, keeping the header, nav, and footer
 3. Update the title and main content
-4. In `blog.html`, add a link to the new post:
-
-```html
-<ul>
-  <li><a href="blog-my-first-post.html">My First Post</a></li>
-  <li><a href="blog-another-post.html">Another Insight</a></li>
-</ul>
-```
+4. In `newsletter.html`, add a new `.article-card` linking to the new post
 
 5. Push the new files to GitHub
 6. Render auto-redeploys

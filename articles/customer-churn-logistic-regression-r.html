@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Applying logistic regression in R to a telecom customer churn dataset — exploratory analysis, model building via LRT, and actionable conclusions. By Ankush Arya.">
+  <meta name="description" content="Applying logistic regression in R to a telecom customer churn dataset: exploratory analysis, model building via LRT, and actionable conclusions. By Ankush Arya.">
   <meta property="og:title" content="Customer Churn: Logistic Regression with R">
-  <meta property="og:description" content="Applying logistic regression in R to a telecom customer churn dataset — exploratory analysis, model building via LRT, and actionable conclusions.">
+  <meta property="og:description" content="Applying logistic regression in R to a telecom customer churn dataset: exploratory analysis, model building via LRT, and actionable conclusions.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://ankusharya.dev/articles/customer-churn-logistic-regression-r.html">
   <meta property="article:published_time" content="2022-11-26">
@@ -289,8 +289,8 @@
             <span class="sep" aria-hidden="true">·</span>
             <time datetime="2022-11-26">November 26, 2022</time>
           </div>
-          <p class="article-lede">Using logistic regression in R to understand why telecom customers leave — from exploratory analysis through model selection via likelihood ratio tests to actionable conclusions</p>
-          <img src="images/customer-churn.jpg" alt="Customer churn analysis — telecom dataset visualisation" class="article-featured-image">
+          <p class="article-lede">Using logistic regression in R to understand why telecom customers leave, from exploratory analysis through model selection via likelihood ratio tests to actionable conclusions</p>
+          <img src="images/customer-churn.jpg" alt="Customer churn analysis, telecom dataset visualisation" class="article-featured-image">
         </header>
 
         <div class="article-body">
@@ -305,11 +305,11 @@
 
           <p>The telecoms churn dataset contains 512 observations across seven predictors, with a binary response variable called <code>churn</code>. Gender, Partner, Payment Method, and Internet Service are categorical variables. Monthly charges is a continuous variable.</p>
 
-          <p>Only <strong>16.60%</strong> of total customers in the dataset churned in the last two years — an important baseline to keep in mind when interpreting the model.</p>
+          <p>Only <strong>16.60%</strong> of total customers in the dataset churned in the last two years. This is an important baseline to keep in mind when interpreting the model.</p>
 
           <figure class="article-figure">
-            <img src="images/churn-figure-1.jpg" alt="Figure 1: Customer churn rate — 16.60% of customers churned in the last two years">
-            <figcaption>Figure 1: Overall churn rate in the dataset — 16.60% of customers churned</figcaption>
+            <img src="images/churn-figure-1.jpg" alt="Figure 1: Customer churn rate of 16.60% over the last two years">
+            <figcaption>Figure 1: Overall churn rate in the dataset: 16.60% of customers churned</figcaption>
           </figure>
 
           <p>Figure 2 shows the breakdown of the categorical variables on customer churn.</p>
@@ -334,16 +334,16 @@
           </div>
 
           <figure class="article-figure">
-            <img src="images/churn-figure-2.jpg" alt="Figure 2: Breakdown of categorical variables — gender, internet service, partner status, and payment method by churn">
+            <img src="images/churn-figure-2.jpg" alt="Figure 2: Breakdown of categorical variables (gender, internet service, partner status, and payment method) by churn">
             <figcaption>Figure 2: Churn breakdown by gender, internet service, partner status, and payment method</figcaption>
           </figure>
 
           <figure class="article-figure">
             <img src="images/churn-figure-3.jpg" alt="Figure 3: Monthly charges spread with binned churn rates">
-            <figcaption>Figure 3: Monthly charges distribution — customers in the £35.6–£52.2 and £68.7–£85.2 bands show higher churn rates</figcaption>
+            <figcaption>Figure 3: Monthly charges distribution: customers in the £35.6 to £52.2 and £68.7 to £85.2 bands show higher churn rates</figcaption>
           </figure>
 
-          <p>Binning the monthly charges reveals a further pattern: customers paying between £35.6–£52.2 and between £68.7–£85.2 per month show notably higher churn percentages than those in adjacent bands.</p>
+          <p>Binning the monthly charges reveals a further pattern: customers paying between £35.6 and £52.2, and between £68.7 and £85.2, per month show notably higher churn percentages than those in adjacent bands.</p>
 
           <h2>Logistic Model</h2>
 
@@ -355,21 +355,21 @@
             &nbsp;&nbsp;&nbsp;&nbsp;+ β₇·(mailed_checkᵢ) + ϵᵢ
           </div>
 
-          <p>Where ηᵢ is the linear predictor of churning, and each dummy variable equals 1 when the observation matches the stated condition and 0 otherwise. The inverse logit function constrains the output to lie between 0 and 1, giving <em>Prob(yᵢ = 1)</em> — the probability of a customer churning.</p>
+          <p>Where ηᵢ is the linear predictor of churning, and each dummy variable equals 1 when the observation matches the stated condition and 0 otherwise. The inverse logit function constrains the output to lie between 0 and 1, giving <em>Prob(yᵢ = 1)</em>, the probability of a customer churning.</p>
 
           <div class="article-pull">
-            <p>A male customer, living with a partner, monthly charges of £70, fibre optic internet, credit card payment — estimated churn probability: <strong>0.226</strong>.</p>
+            <p>A male customer, living with a partner, monthly charges of £70, fibre optic internet, credit card payment. Estimated churn probability: <strong>0.226</strong>.</p>
           </div>
 
           <p>Key findings from the initial model:</p>
           <ul>
-            <li><strong>Gender</strong> — no strong evidence of association (p = 0.410)</li>
-            <li><strong>Fibre optic internet</strong> — positively associated with churning vs DSL (p = 0.0008)</li>
-            <li><strong>No internet service</strong> — negatively associated with churning vs DSL (p &lt; 0.0001)</li>
-            <li><strong>Living with a partner</strong> — negatively associated with churning (p = 0.012)</li>
-            <li><strong>Monthly charges</strong> — each unit increase slightly reduces churn probability (p &lt; 0.0001)</li>
-            <li><strong>Electronic check payment</strong> — positively associated with churning (p = 0.0006)</li>
-            <li><strong>Credit card / mailed check</strong> — no strong evidence of association</li>
+            <li><strong>Gender:</strong> no strong evidence of association (p = 0.410)</li>
+            <li><strong>Fibre optic internet:</strong> positively associated with churning vs DSL (p = 0.0008)</li>
+            <li><strong>No internet service:</strong> negatively associated with churning vs DSL (p &lt; 0.0001)</li>
+            <li><strong>Living with a partner:</strong> negatively associated with churning (p = 0.012)</li>
+            <li><strong>Monthly charges:</strong> each unit increase slightly reduces churn probability (p &lt; 0.0001)</li>
+            <li><strong>Electronic check payment:</strong> positively associated with churning (p = 0.0006)</li>
+            <li><strong>Credit card / mailed check:</strong> no strong evidence of association</li>
           </ul>
 
           <h2>Model Building via LRT</h2>
@@ -378,12 +378,12 @@
 
           <figure class="article-figure">
             <img src="images/churn-table-1.jpg" alt="Table 1: Log-likelihood Ratio Test results showing significance of each predictor">
-            <figcaption>Table 1: Log-likelihood Ratio Test results — Gender is not significant and can be removed; all other predictors are significant</figcaption>
+            <figcaption>Table 1: Log-likelihood Ratio Test results. Gender is not significant and can be removed; all other predictors are significant</figcaption>
           </figure>
 
-          <p>Gender was identified as non-significant and removed. All remaining predictors — Internet Service, Partner, Payment Method, and Monthly Charges — were retained in the final model.</p>
+          <p>Gender was identified as non-significant and removed. All remaining predictors (Internet Service, Partner, Payment Method, and Monthly Charges) were retained in the final model.</p>
 
-          <h3>Final Model — Key Odds Ratios</h3>
+          <h3>Final Model: Key Odds Ratios</h3>
 
           <p><strong>Bank transfer vs credit card:</strong> No significant difference in churn impact (p = 0.221). We fail to reject H₀.</p>
 
@@ -393,11 +393,11 @@
 
           <h2>Conclusion</h2>
 
-          <p>The analysis shows that 16.60% of customers churned. Gender had no meaningful effect. Customers with no internet service were the least likely to churn — the strongest signal in the dataset (p &lt; 0.0001). Customers with a partner churned at roughly half the rate of those without.</p>
+          <p>The analysis shows that 16.60% of customers churned. Gender had no meaningful effect. Customers with no internet service were the least likely to churn. This was the strongest signal in the dataset (p &lt; 0.0001). Customers with a partner churned at roughly half the rate of those without.</p>
 
-          <p>Monthly charges show a narrow but significant negative effect (95% CI: −0.072 to −0.027), suggesting that as charges increase, churn probability marginally decreases — though the practical interpretation requires care.</p>
+          <p>Monthly charges show a narrow but significant negative effect (95% CI: −0.072 to −0.027), suggesting that as charges increase, churn probability marginally decreases, though the practical interpretation requires care.</p>
 
-          <p>The most actionable finding from the binned charges analysis: customers paying between £85.2 and £118 per month are significantly more likely to churn than those paying £19–£35.6. <strong>Discounting monthly charges below £85.2 for high-value customers could meaningfully reduce churn risk.</strong></p>
+          <p>The most actionable finding from the binned charges analysis: customers paying between £85.2 and £118 per month are significantly more likely to churn than those paying £19 to £35.6. <strong>Discounting monthly charges below £85.2 for high-value customers could meaningfully reduce churn risk.</strong></p>
 
           <div class="tag-list" aria-label="Article tags">
             <span>R</span>
@@ -415,11 +415,11 @@
 
         <div class="article-newsletter" aria-label="Newsletter subscription">
           <h2>She Knows Too Much</h2>
-          <p>Data, analytics, and AI insights for practitioners and curious minds. No noise, no hype — just the things worth thinking about.</p>
+          <p>Data, analytics, and AI insights for practitioners and curious minds. No noise, no hype, just the things worth thinking about.</p>
           <form class="signup-form" action="https://your-mail-service.com/replace-me" method="post" aria-label="Newsletter subscribe form" style="max-width: 30rem;">
             <label for="email-article">Email address</label>
             <input id="email-article" type="email" name="email" placeholder="you@example.com" required autocomplete="email">
-            <button class="button button-primary" type="submit">Subscribe — it's free</button>
+            <button class="button button-primary" type="submit">Subscribe for free</button>
           </form>
         </div>
 

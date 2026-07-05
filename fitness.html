@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ankush Arya's personal fitness tracker — a 4-day rotating Total Body split with a workout plan reference and progress log.">
+  <meta name="description" content="Ankush Arya's personal fitness tracker, a 4-day rotating Total Body split with a workout plan reference and progress log.">
   <meta property="og:title" content="Ankush Arya | Fitness Tracker">
   <meta property="og:description" content="Personal workout plan reference and progress tracker for a 4-day rotating Total Body split.">
   <meta property="og:type" content="website">
@@ -266,6 +266,84 @@
         word-break: break-word;
       }
     }
+
+    .glossary {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.75rem;
+      margin-top: 2rem;
+    }
+
+    .glossary summary {
+      cursor: pointer;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .glossary summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .glossary summary::after {
+      content: '+';
+      font-size: 1.5rem;
+      color: var(--primary);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .glossary[open] summary::after {
+      content: '\2212';
+    }
+
+    .glossary-note {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin: 0.5rem 0 0;
+    }
+
+    .glossary-groups {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .glossary-group h3 {
+      margin: 0 0 0.75rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+    }
+
+    .glossary-group dl {
+      margin: 0;
+    }
+
+    .glossary-group dt {
+      font-weight: 600;
+      margin-top: 0.75rem;
+    }
+
+    .glossary-group dt:first-child {
+      margin-top: 0;
+    }
+
+    .glossary-group dd {
+      margin: 0.2rem 0 0;
+      color: var(--muted);
+      font-size: 0.87rem;
+      line-height: 1.5;
+    }
   </style>
 </head>
 <body id="page-fitness">
@@ -290,37 +368,177 @@
     <main>
       <section class="hero hero-fitness" aria-labelledby="fitness-title">
         <h1 id="fitness-title">Fitness Tracker</h1>
-        <p class="hero-text">My 4-day rotating Total Body split (B1_1&ndash;B1_4) &mdash; plan reference and workout log, for personal training use.</p>
+        <p class="hero-text">My 4-day rotating Total Body split (Day 1 to Day 4). Plan reference and workout log, for personal training use.</p>
       </section>
+
+      <details class="glossary">
+        <summary>Exercise Glossary: what each term means</summary>
+        <p class="glossary-note">A quick reference for every exercise and piece of equipment used across the four sessions below.</p>
+        <div class="glossary-groups">
+          <div class="glossary-group">
+            <h3>Warm-up &amp; Cardio</h3>
+            <dl>
+              <dt>Cross Trainer (Elliptical)</dt>
+              <dd>A low-impact machine where you move pedals in an oval path while pushing/pulling long handles, working upper and lower body together.</dd>
+              <dt>Treadmill</dt>
+              <dd>A cardio machine with a moving belt for walking or running in place.</dd>
+              <dt>Cross Bike</dt>
+              <dd>A stationary bike used for low-impact cardio.</dd>
+              <dt>Rowing Machine</dt>
+              <dd>A cardio machine that mimics the rowing motion, working legs, back, and arms together.</dd>
+              <dt>Stair Master</dt>
+              <dd>A stepping machine that simulates climbing stairs continuously.</dd>
+              <dt>Battle Ropes</dt>
+              <dd>Thick, heavy ropes anchored at one end, slammed or waved up and down for conditioning.</dd>
+            </dl>
+          </div>
+
+          <div class="glossary-group">
+            <h3>Legs</h3>
+            <dl>
+              <dt>Lunge Walks</dt>
+              <dd>Walking forward while alternating lunges each step.</dd>
+              <dt>Goblet Squat</dt>
+              <dd>A squat performed holding a single kettlebell or dumbbell close to the chest with both hands.</dd>
+              <dt>Step-Ups</dt>
+              <dd>Stepping up onto a raised platform or box with one leg at a time, then stepping back down.</dd>
+              <dt>Box Jumps</dt>
+              <dd>Explosively jumping from the floor onto a raised box, landing softly with both feet.</dd>
+              <dt>KB Swings</dt>
+              <dd>A hip-hinge movement swinging a kettlebell from between the legs up to chest height, driven by the hips rather than the arms.</dd>
+              <dt>Farmers Walk</dt>
+              <dd>Walking for distance or time while carrying a heavy weight in each hand.</dd>
+              <dt>Squat Holds</dt>
+              <dd>Holding the bottom position of a squat under tension for time.</dd>
+              <dt>Leg Press / Goblet Squat (Superset)</dt>
+              <dd>A machine leg press paired back-to-back with a goblet squat, no rest in between (see &ldquo;Superset&rdquo; below).</dd>
+              <dt>TRX Squats / TRX Reverse Squats</dt>
+              <dd>Squat variations performed holding TRX suspension straps for balance and support.</dd>
+              <dt>Kneel-to-Stand w/ Overhead Press</dt>
+              <dd>Rising from a kneeling position to standing while pressing a weight overhead in one continuous movement.</dd>
+              <dt>Single-Arm Clean &amp; Press</dt>
+              <dd>Lifting a kettlebell or dumbbell from the floor to the shoulder, then pressing it overhead, one arm at a time.</dd>
+              <dt>Hamstring Curls</dt>
+              <dd>A machine exercise curling the heel toward the glutes to target the hamstrings.</dd>
+              <dt>Toe Taps</dt>
+              <dd>Rapidly tapping the toes onto a low box or step, alternating feet.</dd>
+              <dt>Lateral Jumps</dt>
+              <dd>Jumping side-to-side over a line or small obstacle, landing softly.</dd>
+              <dt>Leg Extension</dt>
+              <dd>A seated machine exercise extending the knees to lift a padded lever, isolating the quads.</dd>
+              <dt>Static Lunges</dt>
+              <dd>A lunge held in one split stance, lowering and raising the back knee without stepping.</dd>
+              <dt>TRX Reverse Lunge w/ Kick</dt>
+              <dd>A reverse lunge using TRX straps for support, followed by a front kick as you return to standing.</dd>
+              <dt>Pistol Squats</dt>
+              <dd>A single-leg squat performed all the way down with the other leg extended forward.</dd>
+              <dt>Jump Squats</dt>
+              <dd>A squat that finishes with an explosive vertical jump.</dd>
+            </dl>
+          </div>
+
+          <div class="glossary-group">
+            <h3>Chest, Back &amp; Shoulders</h3>
+            <dl>
+              <dt>Chest Press (Machine)</dt>
+              <dd>A seated machine exercise pressing handles forward to work the chest, shoulders, and triceps.</dd>
+              <dt>Push-Ups</dt>
+              <dd>A bodyweight exercise pressing the body up and down from a plank position.</dd>
+              <dt>Lat Pulldown</dt>
+              <dd>A cable machine exercise pulling a bar down toward the chest to work the lats and upper back.</dd>
+              <dt>One-Arm Landmine Row</dt>
+              <dd>Pulling one end of a barbell, anchored in a landmine attachment, toward the hip, one arm at a time.</dd>
+              <dt>Shoulder Press (Machine)</dt>
+              <dd>A seated or standing press pushing handles overhead to work the shoulders.</dd>
+            </dl>
+          </div>
+
+          <div class="glossary-group">
+            <h3>Core</h3>
+            <dl>
+              <dt>Plank</dt>
+              <dd>Holding a straight-body position supported on forearms/hands and toes, bracing the core.</dd>
+              <dt>Mountain Climbers</dt>
+              <dd>From a plank position, rapidly driving alternating knees toward the chest.</dd>
+              <dt>Walk-Outs</dt>
+              <dd>From standing, bending down and walking the hands out to a plank, then walking them back to standing.</dd>
+              <dt>Scissors</dt>
+              <dd>Lying on your back, alternately raising and lowering straight legs in a scissoring motion.</dd>
+              <dt>Bird Dog</dt>
+              <dd>On hands and knees, extending opposite arm and leg at the same time while keeping the core stable.</dd>
+              <dt>Bridge</dt>
+              <dd>Lying on your back and lifting the hips toward the ceiling, squeezing the glutes at the top.</dd>
+              <dt>Plank Knee-Touch</dt>
+              <dd>From a plank position, tapping alternating knees to the floor with control.</dd>
+              <dt>Side Plank Variations</dt>
+              <dd>Holding a plank on one forearm/hand with the body facing sideways, sometimes with added leg lifts or rotations.</dd>
+              <dt>Leg Drops</dt>
+              <dd>Lying on your back with legs raised, then slowly lowering them toward the floor without arching the back.</dd>
+              <dt>Cross Crunch</dt>
+              <dd>A crunch that twists to bring the opposite elbow and knee together.</dd>
+              <dt>Half Get-Up</dt>
+              <dd>Half of a Turkish get-up, moving from lying down to a seated/propped position while holding a weight overhead.</dd>
+            </dl>
+          </div>
+
+          <div class="glossary-group">
+            <h3>Full Body / Compound</h3>
+            <dl>
+              <dt>Medicine Ball Slams</dt>
+              <dd>Explosively slamming a weighted medicine ball to the ground from overhead.</dd>
+              <dt>Box Pushes</dt>
+              <dd>Pushing a weighted box or sled across the floor for distance.</dd>
+              <dt>Clean &amp; Press</dt>
+              <dd>Lifting a weight from the floor to the shoulders (the &ldquo;clean&rdquo;), then pressing it overhead.</dd>
+              <dt>Wood Choppers</dt>
+              <dd>A rotational core exercise pulling a cable or weight diagonally across the body, like swinging an axe.</dd>
+            </dl>
+          </div>
+
+          <div class="glossary-group">
+            <h3>Equipment &amp; Terms</h3>
+            <dl>
+              <dt>KB</dt>
+              <dd>Kettlebell.</dd>
+              <dt>DB</dt>
+              <dd>Dumbbell.</dd>
+              <dt>TRX</dt>
+              <dd>A suspension trainer: straps anchored overhead that add instability or support to bodyweight exercises.</dd>
+              <dt>Superset</dt>
+              <dd>Two exercises performed back-to-back with no rest in between.</dd>
+            </dl>
+          </div>
+        </div>
+      </details>
 
       <section class="fitness-tracker" aria-label="Workout sessions">
         <div class="session-tabs" role="tablist" aria-label="Select session">
-          <button type="button" class="session-tab" data-target="b1_1" aria-pressed="true">B1_1</button>
-          <button type="button" class="session-tab" data-target="b1_2" aria-pressed="false">B1_2</button>
-          <button type="button" class="session-tab" data-target="b1_3" aria-pressed="false">B1_3</button>
-          <button type="button" class="session-tab" data-target="b1_4" aria-pressed="false">B1_4</button>
+          <button type="button" class="session-tab" data-target="b1_1" aria-pressed="true">Day 1</button>
+          <button type="button" class="session-tab" data-target="b1_2" aria-pressed="false">Day 2</button>
+          <button type="button" class="session-tab" data-target="b1_3" aria-pressed="false">Day 3</button>
+          <button type="button" class="session-tab" data-target="b1_4" aria-pressed="false">Day 4</button>
         </div>
 
         <div id="panel-b1_1" class="session-panel">
-          <h2 class="session-title">B1_1 &mdash; Total Body</h2>
+          <h2 class="session-title">Day 1: Total Body</h2>
           <div id="plan-b1_1"></div>
           <h2 class="session-title">Log This Workout</h2>
           <div id="log-b1_1"></div>
         </div>
         <div id="panel-b1_2" class="session-panel" hidden>
-          <h2 class="session-title">B1_2 &mdash; Total Body</h2>
+          <h2 class="session-title">Day 2: Total Body</h2>
           <div id="plan-b1_2"></div>
           <h2 class="session-title">Log This Workout</h2>
           <div id="log-b1_2"></div>
         </div>
         <div id="panel-b1_3" class="session-panel" hidden>
-          <h2 class="session-title">B1_3 &mdash; Total Body</h2>
+          <h2 class="session-title">Day 3: Total Body</h2>
           <div id="plan-b1_3"></div>
           <h2 class="session-title">Log This Workout</h2>
           <div id="log-b1_3"></div>
         </div>
         <div id="panel-b1_4" class="session-panel" hidden>
-          <h2 class="session-title">B1_4 &mdash; Total Body</h2>
+          <h2 class="session-title">Day 4: Total Body</h2>
           <div id="plan-b1_4"></div>
           <h2 class="session-title">Log This Workout</h2>
           <div id="log-b1_4"></div>
@@ -365,7 +583,7 @@
       return { id, name, sets, reps, unit, weight };
     }
 
-    // NOTE: sets / reps / weight values below are placeholders — edit this
+    // NOTE: sets / reps / weight values below are placeholders, edit this
     // PLAN object with your actual targets for each exercise. This is the
     // only place that data lives.
     const PLAN = {
@@ -436,7 +654,7 @@
             ex('b1_3-legs-static-lunges', 'Static Lunges', 3, 10, 'reps', 'Bodyweight/DB'),
           ]},
           { name: 'Cardio', exercises: [
-            ex('b1_3-cardio-battle-ropes', 'Battle Ropes', 3, 30, 'sec', '—'),
+            ex('b1_3-cardio-battle-ropes', 'Battle Ropes', 3, 30, 'sec', 'N/A'),
             ex('b1_3-cardio-cross-bike', 'Cross Bike', 1, 5, 'min', 'Moderate resistance'),
             ex('b1_3-cardio-rowing-machine', 'Rowing Machine', 1, 5, 'min', 'Moderate pace'),
             ex('b1_3-cardio-stair-master', 'Stair Master', 1, 5, 'min', 'Level'),
@@ -530,7 +748,7 @@
       return '<div class="history-chips">' + entries.map((entry) => {
         const label = entry.incomplete
           ? `${formatDate(entry.date)}: Incomplete`
-          : `${formatDate(entry.date)}: ${escapeHtml(entry.weight || '—')} × ${escapeHtml(entry.reps || '—')}`;
+          : `${formatDate(entry.date)}: ${escapeHtml(entry.weight || 'N/A')} × ${escapeHtml(entry.reps || 'N/A')}`;
         return `<span class="history-chip" title="${escapeHtml(entry.notes || '')}">${label}</span>`;
       }).join('') + '</div>';
     }

@@ -382,7 +382,6 @@ button {
 .form-card,
 .hero-about,
 .hero-newsletter,
-.hero-blog,
 .hero-contact {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -398,9 +397,7 @@ button {
 
 .card p,
 .project-card p,
-.timeline p,
-.archive-placeholder p,
-.blog-placeholder p {
+.timeline p {
   margin: 0.75rem 0 0;
 }
 
